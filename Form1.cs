@@ -16,5 +16,10 @@ namespace Snake
         {
             InitializeComponent();
         }
+
+        private void btnStartGame_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
