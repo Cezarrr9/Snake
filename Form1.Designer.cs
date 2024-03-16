@@ -1,4 +1,6 @@
-﻿namespace Snake
+﻿using System;
+
+namespace Snake
 {
     partial class Form1
     {
@@ -34,9 +36,9 @@
             // btnStartGame
             // 
             this.btnStartGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStartGame.Location = new System.Drawing.Point(312, 203);
+            this.btnStartGame.Location = new System.Drawing.Point(295, 206);
             this.btnStartGame.Name = "btnStartGame";
-            this.btnStartGame.Size = new System.Drawing.Size(200, 93);
+            this.btnStartGame.Size = new System.Drawing.Size(200, 100);
             this.btnStartGame.TabIndex = 0;
             this.btnStartGame.Text = "Start Game";
             this.btnStartGame.UseVisualStyleBackColor = true;
@@ -46,16 +48,23 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(862, 512);
+            this.ClientSize = new System.Drawing.Size(794, 511);
             this.Controls.Add(this.btnStartGame);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Form1";
             this.Text = "Snake";
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private void CenterStartGameButton()
+        {
+            btnStartGame.Left = (this.ClientSize.Width - btnStartGame.Width) / 2;
+            btnStartGame.Top = (this.ClientSize.Height - btnStartGame.Height) / 2;
+        }
 
         private System.Windows.Forms.Button btnStartGame;
     }
