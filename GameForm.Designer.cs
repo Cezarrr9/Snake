@@ -1,4 +1,7 @@
-﻿namespace Snake
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace Snake
 {
     partial class GameForm
     {
@@ -28,38 +31,62 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.GamePanel = new System.Windows.Forms.Panel();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameForm));
+            this.gamePanel = new Snake.GamePanel();
+            this.backgroundPanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // GamePanel
+            // gamePanel
             // 
-            this.GamePanel.Location = new System.Drawing.Point(140, 62);
-            this.GamePanel.Name = "GamePanel";
-            this.GamePanel.Size = new System.Drawing.Size(501, 417);
-            this.GamePanel.TabIndex = 0;
-            this.GamePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.GamePanel_Paint);
+            this.gamePanel.CellSize = 20;
+            this.gamePanel.Food = new System.Drawing.Point(0, 0);
+            this.gamePanel.GridSize = new System.Drawing.Size(20, 20);
+            this.gamePanel.Location = new System.Drawing.Point(140, 62);
+            this.gamePanel.Name = "gamePanel";
+            this.gamePanel.Size = new System.Drawing.Size(400, 400);
+            this.gamePanel.Snake = ((System.Collections.Generic.List<System.Drawing.Point>)(resources.GetObject("gamePanel.Snake")));
+            this.gamePanel.TabIndex = 0;
+            this.gamePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.gamePanel_Paint);
+            // 
+            // backgroundPanel
+            // 
+            this.backgroundPanel.BackColor = System.Drawing.Color.Transparent;
+            this.backgroundPanel.Location = new System.Drawing.Point(130, 53);
+            this.backgroundPanel.Name = "backgroundPanel";
+            this.backgroundPanel.Size = new System.Drawing.Size(420, 420);
+            this.backgroundPanel.TabIndex = 1;
+            this.backgroundPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.backgroundPanel_Paint);
             // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(794, 541);
-            this.Controls.Add(this.GamePanel);
+            this.Controls.Add(this.backgroundPanel);
+            this.Controls.Add(this.gamePanel);
             this.Name = "GameForm";
             this.Text = "Snake";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GameForm_FormClosed);
             this.Resize += new System.EventHandler(this.GameForm_Resize);
             this.ResumeLayout(false);
 
         }
 
-        private void CenterGamePanel()
-        {
-            GamePanel.Left = (this.ClientSize.Width - GamePanel.Width) / 2;
-            GamePanel.Top = (this.ClientSize.Height - GamePanel.Height) / 2;
-        }
-
         #endregion
 
-        private System.Windows.Forms.Panel GamePanel;
+        private void CenterGamePanel()
+        {
+            gamePanel.Left = (this.ClientSize.Width - gamePanel.Width) / 2;
+            gamePanel.Top = (this.ClientSize.Height - gamePanel.Height) / 2;
+        }
+
+        private void CenterBackgroundPanel()
+        {
+            backgroundPanel.Left = (this.ClientSize.Width - backgroundPanel.Width) / 2;
+            backgroundPanel.Top = (this.ClientSize.Height - backgroundPanel.Height) / 2;
+        }
+
+        private GamePanel gamePanel;
+        private Panel backgroundPanel;
     }
 }

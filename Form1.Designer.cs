@@ -69,7 +69,6 @@ namespace Snake
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
