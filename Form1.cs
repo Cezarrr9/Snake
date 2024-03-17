@@ -16,21 +16,36 @@ namespace Snake
         {
             InitializeComponent();
             CenterStartGameButton();
+            CenterTitleLabel();
+        }
+
+        private void ClearForm()
+        {
+            btnStartGame.Enabled = false;
+            btnStartGame.Hide();
+
+            lblTitle.Enabled = false;
+            lblTitle.Hide();
+        }
+
+        private void CreateGamePane()
+        {
+
         }
 
         private void InitializeGame()
         {
-            btnStartGame.Enabled = false;
-            btnStartGame.Hide();
+            
         }
         private void btnStartGame_Click(object sender, EventArgs e)
         {
-            InitializeGame();
+            ClearForm();
         }
 
         private void Form1_Resize(object sender, EventArgs e)
         {
             CenterStartGameButton();
+            CenterTitleLabel();
         }
     }
 }
