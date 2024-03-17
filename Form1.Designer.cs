@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Snake
 {
-    partial class Form1
+    partial class StartForm
     {
         /// <summary>
         /// Required designer variable.
@@ -33,7 +33,6 @@ namespace Snake
         {
             this.btnStartGame = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.gamePanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // btnStartGame
@@ -57,23 +56,15 @@ namespace Snake
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "SNAKE";
             // 
-            // gamePanel
-            // 
-            this.gamePanel.Location = new System.Drawing.Point(145, 47);
-            this.gamePanel.Name = "gamePanel";
-            this.gamePanel.Size = new System.Drawing.Size(504, 439);
-            this.gamePanel.TabIndex = 2;
-            // 
-            // Form1
+            // StartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(794, 541);
-            this.Controls.Add(this.gamePanel);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnStartGame);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "Form1";
+            this.Name = "StartForm";
             this.Text = "Snake";
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.ResumeLayout(false);
@@ -95,27 +86,8 @@ namespace Snake
             lblTitle.Top = (this.ClientSize.Height - lblTitle.Height) / 2 - btnStartGame.Height;
         }
 
-        private void CenterGamePanel()
-        {
-            gamePanel.Left = (this.ClientSize.Width - gamePanel.Width) / 2;
-            gamePanel.Top = (this.ClientSize.Height - gamePanel.Height) / 2;
-        }
-
-        private void DisableGamePanel()
-        {
-            gamePanel.Enabled = false;
-            gamePanel.Hide();
-        }
-
-        private void EnableGamePanel()
-        {
-            gamePanel.Enabled = true;
-            gamePanel.Show();
-        }
-
         private System.Windows.Forms.Button btnStartGame;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Panel gamePanel;
     }
 }
 
