@@ -39,6 +39,7 @@ namespace Snake
             // gamePanel
             // 
             this.gamePanel.CellSize = 20;
+            this.gamePanel.CurrentDirection = Snake.Direction.Left;
             this.gamePanel.Food = new System.Drawing.Point(0, 0);
             this.gamePanel.GridSize = new System.Drawing.Size(20, 20);
             this.gamePanel.Location = new System.Drawing.Point(140, 62);
@@ -67,9 +68,9 @@ namespace Snake
             this.Name = "GameForm";
             this.Text = "Snake";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GameForm_FormClosed);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
             this.Resize += new System.EventHandler(this.GameForm_Resize);
             this.ResumeLayout(false);
-
         }
 
         #endregion

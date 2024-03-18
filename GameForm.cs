@@ -69,9 +69,29 @@ namespace Snake
             }
         }
 
-        private void GameForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void GameForm_FormClosed(object sender, FormClosedEventArgs e) => Application.Exit();
+
+        private void GameForm_KeyDown(object sender, KeyEventArgs e)
         {
-            Application.Exit();
+            switch (e.KeyCode)
+            {
+                case Keys.Up:
+                    if (gamePanel.CurrentDirection != Direction.Down)
+                        gamePanel.CurrentDirection = Direction.Up;
+                    break;
+                case Keys.Down:
+                    if (gamePanel.CurrentDirection != Direction.Up)
+                        gamePanel.CurrentDirection = Direction.Down;
+                    break;
+                case Keys.Left:
+                    if (gamePanel.CurrentDirection != Direction.Right)
+                        gamePanel.CurrentDirection = Direction.Left;
+                    break;
+                case Keys.Right:
+                    if (gamePanel.CurrentDirection != Direction.Left)
+                        gamePanel.CurrentDirection = Direction.Right;
+                    break;
+            }
         }
     }
 
@@ -81,7 +101,7 @@ namespace Snake
         public Point Food { get; set; }
         public Size GridSize { get; set; }
         public int CellSize { get; set; }
-        private Direction CurrentDirection;
+        public Direction CurrentDirection { get; set; }
         private Timer GameTimer;
 
         public GamePanel()
