@@ -32,9 +32,19 @@ namespace Snake
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameForm));
-            this.gamePanel = new Snake.GamePanel();
             this.backgroundPanel = new System.Windows.Forms.Panel();
+            this.gamePanel = new Snake.GamePanel();
+            this.lblScore = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // backgroundPanel
+            // 
+            this.backgroundPanel.BackColor = System.Drawing.Color.Transparent;
+            this.backgroundPanel.Location = new System.Drawing.Point(130, 53);
+            this.backgroundPanel.Name = "backgroundPanel";
+            this.backgroundPanel.Size = new System.Drawing.Size(420, 420);
+            this.backgroundPanel.TabIndex = 1;
+            this.backgroundPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.backgroundPanel_Paint);
             // 
             // gamePanel
             // 
@@ -49,20 +59,22 @@ namespace Snake
             this.gamePanel.TabIndex = 0;
             this.gamePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.gamePanel_Paint);
             // 
-            // backgroundPanel
+            // lblScore
             // 
-            this.backgroundPanel.BackColor = System.Drawing.Color.Transparent;
-            this.backgroundPanel.Location = new System.Drawing.Point(130, 53);
-            this.backgroundPanel.Name = "backgroundPanel";
-            this.backgroundPanel.Size = new System.Drawing.Size(420, 420);
-            this.backgroundPanel.TabIndex = 1;
-            this.backgroundPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.backgroundPanel_Paint);
+            this.lblScore.AutoSize = true;
+            this.lblScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblScore.Location = new System.Drawing.Point(127, 22);
+            this.lblScore.Name = "lblScore";
+            this.lblScore.Size = new System.Drawing.Size(65, 24);
+            this.lblScore.TabIndex = 2;
+            this.lblScore.Text = "Score:";
             // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(794, 541);
+            this.Controls.Add(this.lblScore);
             this.Controls.Add(this.backgroundPanel);
             this.Controls.Add(this.gamePanel);
             this.Name = "GameForm";
@@ -71,6 +83,8 @@ namespace Snake
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
             this.Resize += new System.EventHandler(this.GameForm_Resize);
             this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
@@ -87,7 +101,14 @@ namespace Snake
             backgroundPanel.Top = (this.ClientSize.Height - backgroundPanel.Height) / 2;
         }
 
+        private void CenterScoreLabel()
+        {
+            lblScore.Left = backgroundPanel.Left;
+            lblScore.Top = backgroundPanel.Top - lblScore.Height - 10;
+        }
+
         private GamePanel gamePanel;
         private Panel backgroundPanel;
+        private Label lblScore;
     }
 }

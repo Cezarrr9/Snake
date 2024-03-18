@@ -27,14 +27,17 @@ namespace Snake
             InitializeComponent();
             CenterBackgroundPanel();
             CenterGamePanel();
+            CenterScoreLabel();
             gamePanel.BringToFront();
             gamePanel.InitializeGame();
+            gamePanel.ScoreChanged += GamePanel_ScoreChanged;
         }
 
         private void GameForm_Resize(object sender, EventArgs e)
         {
             CenterBackgroundPanel();
             CenterGamePanel();
+            CenterScoreLabel();
         }
 
         private void gamePanel_Paint(object sender, PaintEventArgs e)
@@ -93,6 +96,11 @@ namespace Snake
                     break;
             }
         }
+
+        private void GamePanel_ScoreChanged(int newScore)
+        {
+            lblScore.Text = $"Score: {newScore}"; // Update the label with the new score
+        }
     }
 
     public class GamePanel : Panel
@@ -102,16 +110,19 @@ namespace Snake
         public Size GridSize { get; set; }
         public int CellSize { get; set; }
         public Direction CurrentDirection { get; set; }
+        public int score { get; set; }
         private Timer GameTimer;
+        public event Action<int> ScoreChanged;
 
         public GamePanel()
         {
-            this.Snake = new List<Point>();
-            this.Food = Point.Empty;
-            this.GridSize = new Size(20, 20);
-            this.CellSize = 20;
-            this.CurrentDirection = Direction.Left;
-            this.GameTimer = new Timer();
+            Snake = new List<Point>();
+            Food = Point.Empty;
+            GridSize = new Size(20, 20);
+            CellSize = 20;
+            CurrentDirection = Direction.Left;
+            GameTimer = new Timer();
+            score = 0;
         }   
 
         private void PlaceFood()
@@ -178,7 +189,9 @@ namespace Snake
             else
             {
                 // If the snake ate the food, place a new food item
+                score += 1;
                 PlaceFood();
+                ScoreChanged?.Invoke(score);
             }
 
             // If the game is still on, call panel1.Invalidate() to redraw
