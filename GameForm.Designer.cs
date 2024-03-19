@@ -36,6 +36,7 @@ namespace Snake
             this.gamePanel = new Snake.GamePanel();
             this.lblScore = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
+            this.btnPlayAgain = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // backgroundPanel
@@ -80,11 +81,24 @@ namespace Snake
             this.lblTime.TabIndex = 3;
             this.lblTime.Text = "Time: 0";
             // 
+            // btnPlayAgain
+            // 
+            this.btnPlayAgain.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPlayAgain.Location = new System.Drawing.Point(570, 60);
+            this.btnPlayAgain.Name = "btnPlayAgain";
+            this.btnPlayAgain.Size = new System.Drawing.Size(174, 107);
+            this.btnPlayAgain.TabIndex = 4;
+            this.btnPlayAgain.Text = "Play Again";
+            this.btnPlayAgain.UseVisualStyleBackColor = true;
+            this.btnPlayAgain.Visible = false;
+            this.btnPlayAgain.Click += new System.EventHandler(this.btnPlayAgain_Click);
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(794, 541);
+            this.Controls.Add(this.btnPlayAgain);
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.lblScore);
             this.Controls.Add(this.backgroundPanel);
@@ -122,12 +136,19 @@ namespace Snake
         private void CenterTimeLabel()
         {
             lblTime.Left = backgroundPanel.Left + 400 - lblTime.Width;
-            lblTime.Top = backgroundPanel.Top - lblScore.Height - 10;
+            lblTime.Top = backgroundPanel.Top - lblTime.Height - 10;
+        }
+
+        private void CenterPlayAgainButton()
+        {
+            btnPlayAgain.Left = backgroundPanel.Left + 430;
+            btnPlayAgain.Top = backgroundPanel.Top;
         }
 
         private GamePanel gamePanel;
         private Panel backgroundPanel;
         private Label lblScore;
         private Label lblTime;
+        private Button btnPlayAgain;
     }
 }

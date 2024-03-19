@@ -29,10 +29,12 @@ namespace Snake
             CenterGamePanel();
             CenterScoreLabel();
             CenterTimeLabel();
+            CenterPlayAgainButton();
             gamePanel.BringToFront();
             gamePanel.InitializeGame();
             gamePanel.ScoreChanged += GamePanel_ScoreChanged;
             gamePanel.TimeChanged += GamePanel_TimeChanged;
+            gamePanel.GameOver += GamePanel_GameOver;
         }
 
         private void GameForm_Resize(object sender, EventArgs e)
@@ -41,6 +43,7 @@ namespace Snake
             CenterGamePanel();
             CenterScoreLabel();
             CenterTimeLabel();
+            CenterPlayAgainButton();
         }
 
         private void gamePanel_Paint(object sender, PaintEventArgs e)
@@ -109,6 +112,19 @@ namespace Snake
         {
             lblTime.Text = $"Time: {newTime}";
         }
+
+        private void GamePanel_GameOver()
+        {
+            btnPlayAgain.Visible = true;
+            btnPlayAgain.Enabled = true;
+        }
+
+        private void btnPlayAgain_Click(object sender, EventArgs e)
+        {
+            btnPlayAgain.Visible = false;
+            btnPlayAgain.Enabled = false;
+            gamePanel.InitializeGame();
+        }
     }
 
     public class GamePanel : Panel
@@ -118,11 +134,12 @@ namespace Snake
         public Size GridSize { get; set; }
         public int CellSize { get; set; }
         public Direction CurrentDirection { get; set; }
-        private int score;
-        private int time;
+        private int Score;
+        private int Time;
         private Timer GameTimer;
         public event Action<int> ScoreChanged;
         public event Action<int> TimeChanged;
+        public event Action GameOver;
 
         public GamePanel()
         {
@@ -130,11 +147,17 @@ namespace Snake
             Food = Point.Empty;
             GridSize = new Size(20, 20);
             CellSize = 20;
-            CurrentDirection = Direction.Left;
             GameTimer = new Timer();
-            score = 0;
-            time = 0;
-        }   
+        }
+        
+        private void ResetGame()
+        {
+            Score = 0;
+            Time = 0;
+            ScoreChanged?.Invoke(Score);
+            TimeChanged?.Invoke(Time);
+            CurrentDirection = Direction.Left;
+        }
 
         private void PlaceFood()
         {
@@ -179,14 +202,18 @@ namespace Snake
                 newHead.Y >= Height / CellSize)
             {
                 GameTimer.Stop(); // Stop the game
-                MessageBox.Show("Game Over!");
+                //MessageBox.Show("Game Over!");
+                GameTimer.Stop();
+                GameOver?.Invoke();
                 return;
             }
 
             if (Snake.Contains(newHead))
             {
                 GameTimer.Stop(); // Stop the game
-                MessageBox.Show("Game Over!");
+                //MessageBox.Show("Game Over!");
+                GameTimer.Stop();
+                GameOver?.Invoke();
                 return;
             }
 
@@ -200,15 +227,15 @@ namespace Snake
             else
             {
                 // If the snake ate the food, place a new food item
-                score += 1;
+                Score += 1;
                 PlaceFood();
-                ScoreChanged?.Invoke(score);
+                ScoreChanged?.Invoke(Score);
             }
             
-            time += 1;
-            if (time % 10 == 0)
+            Time += 1;
+            if (Time % 10 == 0)
             {
-                TimeChanged?.Invoke(time / 10);
+                TimeChanged?.Invoke(Time / 10);
             }
 
             // If the game is still on, call panel1.Invalidate() to redraw
@@ -216,6 +243,7 @@ namespace Snake
         }
         public void InitializeGame()
         {
+            ResetGame();
             PlaceSnake();
             PlaceFood();
 
