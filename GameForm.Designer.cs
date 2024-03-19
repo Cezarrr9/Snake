@@ -37,6 +37,7 @@ namespace Snake
             this.lblScore = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
             this.btnPlayAgain = new System.Windows.Forms.Button();
+            this.btnQuit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // backgroundPanel
@@ -93,11 +94,24 @@ namespace Snake
             this.btnPlayAgain.Visible = false;
             this.btnPlayAgain.Click += new System.EventHandler(this.btnPlayAgain_Click);
             // 
+            // btnQuit
+            // 
+            this.btnQuit.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuit.Location = new System.Drawing.Point(577, 371);
+            this.btnQuit.Name = "btnQuit";
+            this.btnQuit.Size = new System.Drawing.Size(166, 101);
+            this.btnQuit.TabIndex = 5;
+            this.btnQuit.Text = "Quit Game";
+            this.btnQuit.UseVisualStyleBackColor = true;
+            this.btnQuit.Visible = false;
+            this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(794, 541);
+            this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.btnPlayAgain);
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.lblScore);
@@ -145,10 +159,17 @@ namespace Snake
             btnPlayAgain.Top = backgroundPanel.Top;
         }
 
+        private void CenterQuitGameButton()
+        {
+            btnQuit.Left = backgroundPanel.Left + 430;
+            btnQuit.Top = backgroundPanel.Top + 420 - btnQuit.Height;
+        }
+
         private GamePanel gamePanel;
         private Panel backgroundPanel;
         private Label lblScore;
         private Label lblTime;
         private Button btnPlayAgain;
+        private Button btnQuit;
     }
 }

@@ -30,6 +30,7 @@ namespace Snake
             CenterScoreLabel();
             CenterTimeLabel();
             CenterPlayAgainButton();
+            CenterQuitGameButton();
             gamePanel.BringToFront();
             gamePanel.InitializeGame();
             gamePanel.ScoreChanged += GamePanel_ScoreChanged;
@@ -44,6 +45,7 @@ namespace Snake
             CenterScoreLabel();
             CenterTimeLabel();
             CenterPlayAgainButton();
+            CenterQuitGameButton();
         }
 
         private void gamePanel_Paint(object sender, PaintEventArgs e)
@@ -117,13 +119,25 @@ namespace Snake
         {
             btnPlayAgain.Visible = true;
             btnPlayAgain.Enabled = true;
+
+            btnQuit.Visible = true;
+            btnQuit.Enabled = true;
         }
 
         private void btnPlayAgain_Click(object sender, EventArgs e)
         {
             btnPlayAgain.Visible = false;
             btnPlayAgain.Enabled = false;
+
+            btnQuit.Visible = false;
+            btnQuit.Enabled = false;
+
             gamePanel.InitializeGame();
+        }
+
+        private void btnQuit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 
