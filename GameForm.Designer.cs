@@ -35,6 +35,7 @@ namespace Snake
             this.backgroundPanel = new System.Windows.Forms.Panel();
             this.gamePanel = new Snake.GamePanel();
             this.lblScore = new System.Windows.Forms.Label();
+            this.lblTime = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // backgroundPanel
@@ -65,15 +66,26 @@ namespace Snake
             this.lblScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblScore.Location = new System.Drawing.Point(127, 22);
             this.lblScore.Name = "lblScore";
-            this.lblScore.Size = new System.Drawing.Size(65, 24);
+            this.lblScore.Size = new System.Drawing.Size(80, 24);
             this.lblScore.TabIndex = 2;
-            this.lblScore.Text = "Score:";
+            this.lblScore.Text = "Score: 0";
+            // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.Location = new System.Drawing.Point(477, 22);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(73, 24);
+            this.lblTime.TabIndex = 3;
+            this.lblTime.Text = "Time: 0";
             // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(794, 541);
+            this.Controls.Add(this.lblTime);
             this.Controls.Add(this.lblScore);
             this.Controls.Add(this.backgroundPanel);
             this.Controls.Add(this.gamePanel);
@@ -107,8 +119,15 @@ namespace Snake
             lblScore.Top = backgroundPanel.Top - lblScore.Height - 10;
         }
 
+        private void CenterTimeLabel()
+        {
+            lblTime.Left = backgroundPanel.Left + 400 - lblTime.Width;
+            lblTime.Top = backgroundPanel.Top - lblScore.Height - 10;
+        }
+
         private GamePanel gamePanel;
         private Panel backgroundPanel;
         private Label lblScore;
+        private Label lblTime;
     }
 }

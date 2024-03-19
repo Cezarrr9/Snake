@@ -28,9 +28,11 @@ namespace Snake
             CenterBackgroundPanel();
             CenterGamePanel();
             CenterScoreLabel();
+            CenterTimeLabel();
             gamePanel.BringToFront();
             gamePanel.InitializeGame();
             gamePanel.ScoreChanged += GamePanel_ScoreChanged;
+            gamePanel.TimeChanged += GamePanel_TimeChanged;
         }
 
         private void GameForm_Resize(object sender, EventArgs e)
@@ -38,6 +40,7 @@ namespace Snake
             CenterBackgroundPanel();
             CenterGamePanel();
             CenterScoreLabel();
+            CenterTimeLabel();
         }
 
         private void gamePanel_Paint(object sender, PaintEventArgs e)
@@ -101,6 +104,11 @@ namespace Snake
         {
             lblScore.Text = $"Score: {newScore}"; // Update the label with the new score
         }
+
+        private void GamePanel_TimeChanged(int newTime)
+        {
+            lblTime.Text = $"Time: {newTime}";
+        }
     }
 
     public class GamePanel : Panel
@@ -110,9 +118,11 @@ namespace Snake
         public Size GridSize { get; set; }
         public int CellSize { get; set; }
         public Direction CurrentDirection { get; set; }
-        public int score { get; set; }
+        private int score;
+        private int time;
         private Timer GameTimer;
         public event Action<int> ScoreChanged;
+        public event Action<int> TimeChanged;
 
         public GamePanel()
         {
@@ -123,6 +133,7 @@ namespace Snake
             CurrentDirection = Direction.Left;
             GameTimer = new Timer();
             score = 0;
+            time = 0;
         }   
 
         private void PlaceFood()
@@ -192,6 +203,12 @@ namespace Snake
                 score += 1;
                 PlaceFood();
                 ScoreChanged?.Invoke(score);
+            }
+            
+            time += 1;
+            if (time % 10 == 0)
+            {
+                TimeChanged?.Invoke(time / 10);
             }
 
             // If the game is still on, call panel1.Invalidate() to redraw
