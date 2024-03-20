@@ -32,6 +32,8 @@ namespace Snake
             CenterTimeLabel();
             CenterPlayAgainButton();
             CenterQuitGameButton();
+            CenterPauseGameButton();
+            CenterResumeGameButton();
             gamePanel.BringToFront();
             gamePanel.InitializeGame();
             gamePanel.ScoreChanged += GamePanel_ScoreChanged;
@@ -47,6 +49,8 @@ namespace Snake
             CenterTimeLabel();
             CenterPlayAgainButton();
             CenterQuitGameButton();
+            CenterPauseGameButton();
+            CenterResumeGameButton();
         }
 
         private void gamePanel_Paint(object sender, PaintEventArgs e)
@@ -82,10 +86,11 @@ namespace Snake
         }
 
         private void GameForm_FormClosed(object sender, FormClosedEventArgs e) => Application.Exit();
-
-        private void GameForm_KeyDown(object sender, KeyEventArgs e)
+        
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            switch (e.KeyCode)
+            // Handle arrow keys as part of the game control here
+            switch (keyData)
             {
                 case Keys.Up:
                     if (gamePanel.CurrentDirection != Direction.Down)
@@ -104,6 +109,8 @@ namespace Snake
                         gamePanel.CurrentDirection = Direction.Right;
                     break;
             }
+
+            return base.ProcessCmdKey(ref msg, keyData); // Call the base class
         }
 
         private void GamePanel_ScoreChanged(int newScore)
@@ -116,6 +123,22 @@ namespace Snake
             lblTime.Text = $"Time: {newTime}";
         }
 
+        private void SetPlayingView()
+        {
+            btnPlayAgain.Visible = false;
+            btnPlayAgain.Enabled = false;
+            btnPlayAgain.Text = "Play Again";
+
+            btnQuit.Visible = false;
+            btnQuit.Enabled = false;
+
+            btnPause.Visible = true;
+            btnPause.Enabled = true;
+
+            btnResume.Visible = false;
+            btnResume.Enabled = false;
+        }
+
         private void GamePanel_GameOver()
         {
             btnPlayAgain.Visible = true;
@@ -123,22 +146,46 @@ namespace Snake
 
             btnQuit.Visible = true;
             btnQuit.Enabled = true;
+
+            btnPause.Visible = false;
+            btnPause.Enabled = false;
         }
 
         private void btnPlayAgain_Click(object sender, EventArgs e)
         {
-            btnPlayAgain.Visible = false;
-            btnPlayAgain.Enabled = false;
-
-            btnQuit.Visible = false;
-            btnQuit.Enabled = false;
-
+            SetPlayingView();
             gamePanel.InitializeGame();
         }
 
         private void btnQuit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnPause_Click(object sender, EventArgs e)
+        {
+            gamePanel.CountTimer.Stop();
+            gamePanel.GameTimer.Stop();
+
+            btnPlayAgain.Text = "Restart Game";
+            btnPlayAgain.Visible = true;
+            btnPlayAgain.Enabled = true;
+
+            btnQuit.Visible = true;
+            btnQuit.Enabled = true;
+
+            btnResume.Visible = true;
+            btnResume.Enabled = true;
+
+            btnPause.Visible = false;
+            btnPause.Enabled = false;
+        }
+
+        private void btnResume_Click(object sender, EventArgs e)
+        {
+            SetPlayingView();
+            gamePanel.CountTimer.Start();
+            gamePanel.GameTimer.Start();
         }
     }
 
@@ -151,8 +198,8 @@ namespace Snake
         public Direction CurrentDirection { get; set; }
         private int Score;
         private int Time;
-        private Timer GameTimer;
-        private Timer CountTimer;
+        public Timer GameTimer { get; set; }
+        public Timer CountTimer { get; set; }
         public event Action<int> ScoreChanged;
         public event Action<int> TimeChanged;
         public event Action GameOver;
@@ -224,8 +271,7 @@ namespace Snake
                 newHead.Y >= Height / CellSize)
             {
                 GameTimer.Stop(); // Stop the game
-                //MessageBox.Show("Game Over!");
-                GameTimer.Stop();
+                CountTimer.Stop();
                 GameOver?.Invoke();
                 return;
             }
@@ -233,8 +279,7 @@ namespace Snake
             if (Snake.Contains(newHead))
             {
                 GameTimer.Stop(); // Stop the game
-                //MessageBox.Show("Game Over!");
-                GameTimer.Stop();
+                CountTimer.Stop();
                 GameOver?.Invoke();
                 return;
             }
@@ -258,6 +303,8 @@ namespace Snake
             // If the game is still on, call panel1.Invalidate() to redraw
             Invalidate();
         }
+
+        
 
         private void InitializeGameTimer()
         {
