@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -151,6 +152,7 @@ namespace Snake
         private int Score;
         private int Time;
         private Timer GameTimer;
+        private Timer CountTimer;
         public event Action<int> ScoreChanged;
         public event Action<int> TimeChanged;
         public event Action GameOver;
@@ -184,7 +186,13 @@ namespace Snake
         private void PlaceSnake()
         {
             Snake.Clear();
-            Snake.Add(new Point(5, 5));
+            Snake.Add(new Point(10, 10));
+        }
+
+        private void UpdateTime(object sender, EventArgs e)
+        {
+            Time += 1;
+            TimeChanged?.Invoke(Time);
         }
 
         public void UpdateGame(object sender, EventArgs e)
@@ -242,29 +250,37 @@ namespace Snake
             {
                 // If the snake ate the food, place a new food item
                 Score += 1;
+                GameTimer.Interval -= 10;
                 PlaceFood();
                 ScoreChanged?.Invoke(Score);
-            }
-            
-            Time += 1;
-            if (Time % 10 == 0)
-            {
-                TimeChanged?.Invoke(Time / 10);
             }
 
             // If the game is still on, call panel1.Invalidate() to redraw
             Invalidate();
+        }
+
+        private void InitializeGameTimer()
+        {
+            GameTimer = new Timer();
+            GameTimer.Interval = 400;
+            GameTimer.Tick += UpdateGame;
+            GameTimer.Start();
+        }
+
+        private void InitializeCountTimer()
+        {
+            CountTimer = new Timer();
+            CountTimer.Interval = 1000;
+            CountTimer.Tick += UpdateTime;
+            CountTimer.Start();
         }
         public void InitializeGame()
         {
             ResetGame();
             PlaceSnake();
             PlaceFood();
-
-            GameTimer = new Timer();
-            GameTimer.Interval = 100;
-            GameTimer.Tick += UpdateGame;
-            GameTimer.Start();
+            InitializeGameTimer();
+            InitializeCountTimer();
         }
     }
 }
