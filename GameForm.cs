@@ -225,9 +225,12 @@ namespace Snake
         private void PlaceFood()
         {
             Random rnd = new Random();
-            int x = rnd.Next(Width / CellSize);
-            int y = rnd.Next(Height / CellSize);
-            Food = new Point(x, y);
+            do
+            {
+                int x = rnd.Next(Width / CellSize);
+                int y = rnd.Next(Height / CellSize);
+                Food = new Point(x, y);
+            } while (Snake.Contains(Food));
         }
 
         private void PlaceSnake()
