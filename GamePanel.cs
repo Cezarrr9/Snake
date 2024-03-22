@@ -16,8 +16,7 @@ namespace Snake
         public Timer CountTimer { get; set; }
         public int Score { get; set; }
         public int Time { get; set; }
-        public Size GridSize { get; set; }
-        public int CellSize { get; set; }
+        public const int CELL_SIZE = 20;
         public Direction CurrentDirection { get; set; }
 
         public event Action<int> ScoreChanged;
@@ -28,8 +27,6 @@ namespace Snake
         {
             Snake = new List<Point>();
             Food = Point.Empty;
-            GridSize = new Size(20, 20);
-            CellSize = 20;
             GameTimer = new Timer();
         }
 
@@ -47,8 +44,8 @@ namespace Snake
             var rnd = new Random();
             do
             {
-                int x = rnd.Next(Width / CellSize);
-                int y = rnd.Next(Height / CellSize);
+                int x = rnd.Next(Width / CELL_SIZE);
+                int y = rnd.Next(Height / CELL_SIZE);
                 Food = new Point(x, y);
             } while (Snake.Contains(Food));
         }
@@ -90,8 +87,8 @@ namespace Snake
             // Check for collisions with the frame
             if (newHead.X < 0 ||
                 newHead.Y < 0 ||
-                newHead.X >= Width / CellSize ||
-                newHead.Y >= Height / CellSize)
+                newHead.X >= Width / CELL_SIZE ||
+                newHead.Y >= Height / CELL_SIZE)
             {
                 GameTimer.Stop(); 
                 CountTimer.Stop();
@@ -122,7 +119,7 @@ namespace Snake
                 // If the snake ate the food, verify if the player won the game
                 Score += 1;
                 ScoreChanged?.Invoke(Score);
-                if (Score == CellSize * GridSize.Height - 1)
+                if (Score == Width - 1)
                 {
                     GameTimer.Stop();
                     CountTimer.Stop();

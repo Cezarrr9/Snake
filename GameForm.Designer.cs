@@ -113,11 +113,11 @@ namespace Snake
             // 
             // gamePanel
             // 
-            this.gamePanel.CellSize = 20;
+            //this.gamePanel.CellSize = 20;
             this.gamePanel.CountTimer = null;
             this.gamePanel.CurrentDirection = Snake.Direction.Left;
             this.gamePanel.Food = new System.Drawing.Point(0, 0);
-            this.gamePanel.GridSize = new System.Drawing.Size(20, 20);
+            //this.gamePanel.GridSize = new System.Drawing.Size(20, 20);
             this.gamePanel.Location = new System.Drawing.Point(199, 121);
             this.gamePanel.Name = "gamePanel";
             this.gamePanel.Size = new System.Drawing.Size(400, 400);
@@ -215,12 +215,12 @@ namespace Snake
 
             foreach (var segment in gamePanel.Snake)
             {
-                g.FillRectangle(Brushes.Green, segment.X * gamePanel.CellSize, segment.Y * gamePanel.CellSize,
-                    gamePanel.CellSize, gamePanel.CellSize);
+                g.FillRectangle(Brushes.Green, segment.X * GamePanel.CELL_SIZE, segment.Y * GamePanel.CELL_SIZE,
+                    GamePanel.CELL_SIZE, GamePanel.CELL_SIZE);
             }
 
-            g.FillRectangle(Brushes.Red, gamePanel.Food.X * gamePanel.CellSize, gamePanel.Food.Y * gamePanel.CellSize,
-                gamePanel.CellSize, gamePanel.CellSize);
+            g.FillRectangle(Brushes.Red, gamePanel.Food.X * GamePanel.CELL_SIZE, gamePanel.Food.Y * GamePanel.CELL_SIZE,
+                GamePanel.CELL_SIZE, GamePanel.CELL_SIZE);
         }
 
         private void backgroundPanel_Paint(object sender, PaintEventArgs e)
