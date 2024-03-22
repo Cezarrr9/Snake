@@ -42,51 +42,6 @@ namespace Snake
             gamePanel.GameOver += GamePanel_GameOver;
         }
 
-        private void GameForm_Resize(object sender, EventArgs e)
-        {
-            CenterBackgroundPanel();
-            CenterGamePanel();
-            CenterScoreLabel();
-            CenterTimeLabel();
-            CenterPlayAgainButton();
-            CenterQuitGameButton();
-            CenterPauseGameButton();
-            CenterResumeGameButton();
-        }
-
-        private void gamePanel_Paint(object sender, PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-
-            foreach (var segment in gamePanel.Snake)
-            {
-                g.FillRectangle(Brushes.Green, segment.X * gamePanel.CellSize, segment.Y * gamePanel.CellSize,
-                    gamePanel.CellSize, gamePanel.CellSize);
-            }
-
-            g.FillRectangle(Brushes.Red, gamePanel.Food.X * gamePanel.CellSize, gamePanel.Food.Y * gamePanel.CellSize,
-                gamePanel.CellSize, gamePanel.CellSize);
-        }
-
-        private void backgroundPanel_Paint(object sender, PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-
-            // Customize your border style
-            int thickness = 10; // Thickness of the border
-            Color borderColor = Color.Black; // Color of the border
-
-            // For having the borders of the same thickness
-            float offsetThickness = thickness / 2f;
-
-            using (Pen pen = new Pen(borderColor, thickness))
-            {
-                // Drawing just inside the bounds to avoid clipping
-                g.DrawRectangle(pen, offsetThickness, offsetThickness, backgroundPanel.Width - thickness,
-                    backgroundPanel.Height - thickness);
-            }
-        }
-
         private void GameForm_FormClosed(object sender, FormClosedEventArgs e) => Application.Exit();
         
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -114,16 +69,6 @@ namespace Snake
 
             // Call the base class
             return base.ProcessCmdKey(ref msg, keyData); 
-        }
-
-        private void GamePanel_ScoreChanged(int newScore)
-        {
-            lblScore.Text = $"Score: {newScore}"; 
-        }
-
-        private void GamePanel_TimeChanged(int newTime)
-        {
-            lblTime.Text = $"Time: {newTime}";
         }
 
         private void SetPlayingView()

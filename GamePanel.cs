@@ -119,10 +119,17 @@ namespace Snake
             }
             else
             {
-                // If the snake ate the food, place a new food item,
-                // increase the score and the speed of the snake
+                // If the snake ate the food, verify if the player won the game
                 Score += 1;
                 ScoreChanged?.Invoke(Score);
+                if (Score == CellSize * GridSize.Height - 1)
+                {
+                    GameTimer.Stop();
+                    CountTimer.Stop();
+                    MessageBox.Show("You Won!");
+                    GameOver?.Invoke();
+                    return;
+                }
                 PlaceFood();
                 GameTimer.Interval -= 1;
             }
