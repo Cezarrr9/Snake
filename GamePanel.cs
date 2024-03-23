@@ -11,6 +11,7 @@ namespace Snake
     public class GamePanel : Panel
     {
         public List<Point> Snake { get; set; }
+        public List<Direction> Moves { get; set; }
         public Point Food { get; set; }
         public Timer GameTimer { get; set; }
         public Timer CountTimer { get; set; }
@@ -25,6 +26,7 @@ namespace Snake
 
         public GamePanel()
         {
+            Moves = new List<Direction>();
             Snake = new List<Point>();
             Food = Point.Empty;
             GameTimer = new Timer();
@@ -130,6 +132,8 @@ namespace Snake
                 PlaceFood();
                 GameTimer.Interval -= 1;
             }
+
+            Moves.Clear();
 
             // If the game is still on, redraw
             Invalidate();

@@ -50,20 +50,24 @@ namespace Snake
             switch (keyData)
             {
                 case Keys.Up:
-                    if (gamePanel.CurrentDirection != Direction.Down)
+                    if (gamePanel.CurrentDirection != Direction.Down && gamePanel.Moves.Count() == 0)
                         gamePanel.CurrentDirection = Direction.Up;
+                        gamePanel.Moves.Add(gamePanel.CurrentDirection);
                     break;
                 case Keys.Down:
-                    if (gamePanel.CurrentDirection != Direction.Up)
+                    if (gamePanel.CurrentDirection != Direction.Up && gamePanel.Moves.Count() == 0)
                         gamePanel.CurrentDirection = Direction.Down;
+                        gamePanel.Moves.Add(gamePanel.CurrentDirection);
                     break;
                 case Keys.Left:
-                    if (gamePanel.CurrentDirection != Direction.Right)
+                    if (gamePanel.CurrentDirection != Direction.Right && gamePanel.Moves.Count() == 0)
                         gamePanel.CurrentDirection = Direction.Left;
+                        gamePanel.Moves.Add(gamePanel.CurrentDirection);
                     break;
                 case Keys.Right:
-                    if (gamePanel.CurrentDirection != Direction.Left)
+                    if (gamePanel.CurrentDirection != Direction.Left && gamePanel.Moves.Count() == 0)
                         gamePanel.CurrentDirection = Direction.Right;
+                        gamePanel.Moves.Add(gamePanel.CurrentDirection);
                     break;
             }
 
@@ -119,8 +123,8 @@ namespace Snake
 
             GamePanel_GameStopped();
 
-            btnPause.Visible = false;
-            btnPause.Enabled = false;
+            btnResume.Visible = true;
+            btnResume.Enabled = true;
         }
 
         private void btnResume_Click(object sender, EventArgs e)
