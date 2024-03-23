@@ -1,7 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
-
-namespace Snake
+﻿namespace Snake
 {
     partial class StartForm
     {
@@ -73,12 +70,19 @@ namespace Snake
 
         #endregion
 
+        /// <summary>
+        /// Places the start game button in the center of the screen. 
+        /// </summary>
         private void CenterStartGameButton()
         {
             btnStartGame.Left = (this.ClientSize.Width - btnStartGame.Width) / 2;
             btnStartGame.Top = (this.ClientSize.Height - btnStartGame.Height) / 2;
         }
 
+        /// <summary>
+        /// Places the title label in the center of the screen, right 
+        /// on top of the start game button.
+        /// </summary>
         private void CenterTitleLabel()
         {
             lblTitle.Left = (this.ClientSize.Width - lblTitle.Width) / 2;
