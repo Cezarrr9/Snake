@@ -39,7 +39,7 @@ namespace Snake
             gamePanel.InitializeGame();
             gamePanel.ScoreChanged += GamePanel_ScoreChanged;
             gamePanel.TimeChanged += GamePanel_TimeChanged;
-            gamePanel.GameOver += GamePanel_GameOver;
+            gamePanel.GameStopped += GamePanel_GameStopped;
         }
 
         private void GameForm_FormClosed(object sender, FormClosedEventArgs e) => Application.Exit();
@@ -87,7 +87,7 @@ namespace Snake
             btnResume.Enabled = false;
         }
 
-        private void GamePanel_GameOver()
+        private void GamePanel_GameStopped()
         {
             btnPlayAgain.Visible = true;
             btnPlayAgain.Enabled = true;
@@ -116,14 +116,8 @@ namespace Snake
             gamePanel.GameTimer.Stop();
 
             btnPlayAgain.Text = "Restart Game";
-            btnPlayAgain.Visible = true;
-            btnPlayAgain.Enabled = true;
 
-            btnQuit.Visible = true;
-            btnQuit.Enabled = true;
-
-            btnResume.Visible = true;
-            btnResume.Enabled = true;
+            GamePanel_GameStopped();
 
             btnPause.Visible = false;
             btnPause.Enabled = false;

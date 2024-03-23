@@ -21,7 +21,7 @@ namespace Snake
 
         public event Action<int> ScoreChanged;
         public event Action<int> TimeChanged;
-        public event Action GameOver;
+        public event Action GameStopped;
 
         public GamePanel()
         {
@@ -92,7 +92,7 @@ namespace Snake
             {
                 GameTimer.Stop(); 
                 CountTimer.Stop();
-                GameOver?.Invoke();
+                GameStopped?.Invoke();
                 return;
             }
 
@@ -101,7 +101,7 @@ namespace Snake
             {
                 GameTimer.Stop(); 
                 CountTimer.Stop();
-                GameOver?.Invoke();
+                GameStopped?.Invoke();
                 return;
             }
 
@@ -124,7 +124,7 @@ namespace Snake
                     GameTimer.Stop();
                     CountTimer.Stop();
                     MessageBox.Show("You Won!");
-                    GameOver?.Invoke();
+                    GameStopped?.Invoke();
                     return;
                 }
                 PlaceFood();
