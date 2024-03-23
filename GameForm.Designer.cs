@@ -113,11 +113,9 @@ namespace Snake
             // 
             // gamePanel
             // 
-            //this.gamePanel.CellSize = 20;
             this.gamePanel.CountTimer = null;
             this.gamePanel.CurrentDirection = Snake.Direction.Left;
             this.gamePanel.Food = new System.Drawing.Point(0, 0);
-            //this.gamePanel.GridSize = new System.Drawing.Size(20, 20);
             this.gamePanel.Location = new System.Drawing.Point(199, 121);
             this.gamePanel.Name = "gamePanel";
             this.gamePanel.Size = new System.Drawing.Size(400, 400);
@@ -161,73 +159,113 @@ namespace Snake
 
         #endregion
 
+        /// <summary>
+        /// Place the game panel into the center of the form.
+        /// </summary>
         private void CenterGamePanel()
         {
             gamePanel.Left = (this.ClientSize.Width - gamePanel.Width) / 2;
             gamePanel.Top = (this.ClientSize.Height - gamePanel.Height) / 2;
         }
 
+        /// <summary>
+        /// Place the background panel into the center of the form.
+        /// </summary>
         private void CenterBackgroundPanel()
         {
             backgroundPanel.Left = (this.ClientSize.Width - backgroundPanel.Width) / 2;
             backgroundPanel.Top = (this.ClientSize.Height - backgroundPanel.Height) / 2;
         }
 
-        private void CenterScoreLabel()
+        /// <summary>
+        /// Place the score label at the top left of the background panel.
+        /// </summary>
+        private void PlaceScoreLabel()
         {
             lblScore.Left = backgroundPanel.Left;
             lblScore.Top = backgroundPanel.Top - lblScore.Height - 10;
         }
 
-        private void CenterTimeLabel()
+        /// <summary>
+        /// Place the time label at the left top of the background panel.
+        /// </summary>
+        private void PlaceTimeLabel()
         {
             lblTime.Left = backgroundPanel.Left + 400 - lblTime.Width;
             lblTime.Top = backgroundPanel.Top - lblTime.Height - 10;
         }
 
-        private void CenterPlayAgainButton()
+        /// <summary>
+        /// Place the play again button on the right side of 
+        /// the background panel right beneath its top.
+        /// </summary>
+        private void PlacePlayAgainButton()
         {
             btnPlayAgain.Left = backgroundPanel.Left + 430;
             btnPlayAgain.Top = backgroundPanel.Top;
         }
 
-        private void CenterQuitGameButton()
+        /// <summary>
+        /// Place the quit game button on the right side of 
+        /// the bacground panel right above its bottom.
+        /// </summary>
+        private void PlaceQuitGameButton()
         {
             btnQuit.Left = backgroundPanel.Left + 430;
             btnQuit.Top = backgroundPanel.Top + 420 - btnQuit.Height;
         }
 
-        private void CenterPauseGameButton()
+        /// <summary>
+        /// Place the pause game button on the right side of the background panel,
+        /// in the middle of the screen.
+        /// </summary>
+        private void PlacePauseGameButton()
         {
             btnPause.Left = backgroundPanel.Left + 430;
             btnPause.Top = (this.ClientSize.Height - btnPause.Height) / 2; 
         }
 
-        private void CenterResumeGameButton()
+        /// <summary>
+        /// Place the resume game button on the left side of the background panel, 
+        /// at the same level with the pause game button.
+        /// </summary>
+        private void PlaceResumeGameButton()
         {
             btnResume.Left = backgroundPanel.Left - btnResume.Width - 30;
             btnResume.Top = btnPause.Top;
         }
 
+        /// <summary>
+        /// Draws the state of the game at a certain point in time.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gamePanel_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
 
+            // Draw the snake
             foreach (var segment in gamePanel.Snake)
             {
                 g.FillRectangle(Brushes.Green, segment.X * GamePanel.CELL_SIZE, segment.Y * GamePanel.CELL_SIZE,
                     GamePanel.CELL_SIZE, GamePanel.CELL_SIZE);
             }
 
+            // Draw the food 
             g.FillRectangle(Brushes.Red, gamePanel.Food.X * GamePanel.CELL_SIZE, gamePanel.Food.Y * GamePanel.CELL_SIZE,
                 GamePanel.CELL_SIZE, GamePanel.CELL_SIZE);
         }
 
+        /// <summary>
+        /// Draws a frame around the background panel.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void backgroundPanel_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
 
-            // Customize your border style
+            // Customize border style
             int thickness = 10;
             Color borderColor = Color.Black;
 
@@ -242,26 +280,40 @@ namespace Snake
             }
         }
 
+        /// <summary>
+        /// Updates the text on the score label when the score is updated. 
+        /// </summary>
+        /// <param name="newScore">The new value of the player's score</param>
         private void GamePanel_ScoreChanged(int newScore)
         {
             lblScore.Text = $"Score: {newScore}";
         }
 
+        /// <summary>
+        /// Updates the text on the time label by displaying the time 
+        /// passed since the beginning of the game.
+        /// </summary>
+        /// <param name="newTime">The new value of the time passed (in seconds)</param>
         private void GamePanel_TimeChanged(int newTime)
         {
             lblTime.Text = $"Time: {newTime}";
         }
 
+        /// <summary>
+        /// Updates the position of each component of the form after resizing it.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GameForm_Resize(object sender, EventArgs e)
         {
             CenterBackgroundPanel();
             CenterGamePanel();
-            CenterScoreLabel();
-            CenterTimeLabel();
-            CenterPlayAgainButton();
-            CenterQuitGameButton();
-            CenterPauseGameButton();
-            CenterResumeGameButton();
+            PlaceScoreLabel();
+            PlaceTimeLabel();
+            PlacePlayAgainButton();
+            PlaceQuitGameButton();
+            PlacePauseGameButton();
+            PlaceResumeGameButton();
         }
 
         private GamePanel gamePanel;

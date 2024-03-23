@@ -28,12 +28,12 @@ namespace Snake
             InitializeComponent();
             CenterBackgroundPanel();
             CenterGamePanel();
-            CenterScoreLabel();
-            CenterTimeLabel();
-            CenterPlayAgainButton();
-            CenterQuitGameButton();
-            CenterPauseGameButton();
-            CenterResumeGameButton();
+            PlaceScoreLabel();
+            PlaceTimeLabel();
+            PlacePlayAgainButton();
+            PlaceQuitGameButton();
+            PlacePauseGameButton();
+            PlaceResumeGameButton();
 
             gamePanel.BringToFront();
             gamePanel.InitializeGame();
