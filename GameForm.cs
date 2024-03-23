@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Text;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.Remoting.Channels;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Snake
 {
+    // The directions in which the snake can move 
     public enum Direction
     {
         Up,
@@ -42,13 +34,26 @@ namespace Snake
             gamePanel.GameStopped += GamePanel_GameStopped;
         }
 
+        /// <summary>
+        /// Exits the application in case the form was closed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GameForm_FormClosed(object sender, FormClosedEventArgs e) => Application.Exit();
         
+        /// <summary>
+        /// Processes the commands of the player in order to maneuver the snake.
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="keyData"></param>
+        /// <returns>true if the key was processed and consumed by control; othwerise, false</returns>
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            // Handle arrow keys as part of the game control here
             switch (keyData)
             {
+                // The snake can't move suddenly to the opposite direction.
+                // Also, we allow just one key to be processed
+                // before each update of the game panel.
                 case Keys.Up:
                     if (gamePanel.CurrentDirection != Direction.Down && gamePanel.Moves.Count() == 0)
                         gamePanel.CurrentDirection = Direction.Up;
@@ -75,45 +80,33 @@ namespace Snake
             return base.ProcessCmdKey(ref msg, keyData); 
         }
 
-        private void SetPlayingView()
-        {
-            btnPlayAgain.Visible = false;
-            btnPlayAgain.Enabled = false;
-            btnPlayAgain.Text = "Play Again";
-
-            btnQuit.Visible = false;
-            btnQuit.Enabled = false;
-
-            btnPause.Visible = true;
-            btnPause.Enabled = true;
-
-            btnResume.Visible = false;
-            btnResume.Enabled = false;
-        }
-
-        private void GamePanel_GameStopped()
-        {
-            btnPlayAgain.Visible = true;
-            btnPlayAgain.Enabled = true;
-
-            btnQuit.Visible = true;
-            btnQuit.Enabled = true;
-
-            btnPause.Visible = false;
-            btnPause.Enabled = false;
-        }
-
+        /// <summary>
+        /// Sets the playing view and start a new game.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPlayAgain_Click(object sender, EventArgs e)
         {
             SetPlayingView();
             gamePanel.InitializeGame();
         }
 
+        /// <summary>
+        /// Exits the application.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnQuit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        /// <summary>
+        /// Pauses the game and offers the player the opportunity to
+        /// either continue the game or start a new game. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPause_Click(object sender, EventArgs e)
         {
             gamePanel.CountTimer.Stop();
@@ -127,6 +120,11 @@ namespace Snake
             btnResume.Enabled = true;
         }
 
+        /// <summary>
+        /// Sets the playing view and unpauses the timers. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnResume_Click(object sender, EventArgs e)
         {
             SetPlayingView();

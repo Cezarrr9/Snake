@@ -160,7 +160,7 @@ namespace Snake
         #endregion
 
         /// <summary>
-        /// Place the game panel into the center of the form.
+        /// Places the game panel into the center of the form.
         /// </summary>
         private void CenterGamePanel()
         {
@@ -169,7 +169,7 @@ namespace Snake
         }
 
         /// <summary>
-        /// Place the background panel into the center of the form.
+        /// Places the background panel into the center of the form.
         /// </summary>
         private void CenterBackgroundPanel()
         {
@@ -178,7 +178,7 @@ namespace Snake
         }
 
         /// <summary>
-        /// Place the score label at the top left of the background panel.
+        /// Places the score label at the top left of the background panel.
         /// </summary>
         private void PlaceScoreLabel()
         {
@@ -187,7 +187,7 @@ namespace Snake
         }
 
         /// <summary>
-        /// Place the time label at the left top of the background panel.
+        /// Places the time label at the left top of the background panel.
         /// </summary>
         private void PlaceTimeLabel()
         {
@@ -196,7 +196,7 @@ namespace Snake
         }
 
         /// <summary>
-        /// Place the play again button on the right side of 
+        /// Places the play again button on the right side of 
         /// the background panel right beneath its top.
         /// </summary>
         private void PlacePlayAgainButton()
@@ -206,7 +206,7 @@ namespace Snake
         }
 
         /// <summary>
-        /// Place the quit game button on the right side of 
+        /// Places the quit game button on the right side of 
         /// the bacground panel right above its bottom.
         /// </summary>
         private void PlaceQuitGameButton()
@@ -216,7 +216,7 @@ namespace Snake
         }
 
         /// <summary>
-        /// Place the pause game button on the right side of the background panel,
+        /// Places the pause game button on the right side of the background panel,
         /// in the middle of the screen.
         /// </summary>
         private void PlacePauseGameButton()
@@ -226,7 +226,7 @@ namespace Snake
         }
 
         /// <summary>
-        /// Place the resume game button on the left side of the background panel, 
+        /// Places the resume game button on the left side of the background panel, 
         /// at the same level with the pause game button.
         /// </summary>
         private void PlaceResumeGameButton()
@@ -297,6 +297,40 @@ namespace Snake
         private void GamePanel_TimeChanged(int newTime)
         {
             lblTime.Text = $"Time: {newTime}";
+        }
+
+        /// <summary>
+        /// Disables and hides the unnecessary buttons for the time during the game.
+        /// </summary>
+        private void SetPlayingView()
+        {
+            btnPlayAgain.Visible = false;
+            btnPlayAgain.Enabled = false;
+            btnPlayAgain.Text = "Play Again";
+
+            btnQuit.Visible = false;
+            btnQuit.Enabled = false;
+
+            btnPause.Visible = true;
+            btnPause.Enabled = true;
+
+            btnResume.Visible = false;
+            btnResume.Enabled = false;
+        }
+
+        /// <summary>
+        /// Enables and shows the necessary buttons for when the game stops.
+        /// </summary>
+        private void GamePanel_GameStopped()
+        {
+            btnPlayAgain.Visible = true;
+            btnPlayAgain.Enabled = true;
+
+            btnQuit.Visible = true;
+            btnQuit.Enabled = true;
+
+            btnPause.Visible = false;
+            btnPause.Enabled = false;
         }
 
         /// <summary>
