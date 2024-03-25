@@ -49,7 +49,7 @@
             this.picCanvas.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.picCanvas.Location = new System.Drawing.Point(198, 125);
             this.picCanvas.Name = "picCanvas";
-            this.picCanvas.Size = new System.Drawing.Size(581, 500);
+            this.picCanvas.Size = new System.Drawing.Size(581, 501);
             this.picCanvas.TabIndex = 0;
             this.picCanvas.TabStop = false;
             this.picCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.UpdateGraphics);

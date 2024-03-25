@@ -69,57 +69,63 @@ namespace Snake
 
         private void UpdateGame(object sender, EventArgs e)
         {
-            for (int i = _snake.Count - 1; i >= 0; i--)
+            int coordX = _snake[0].X;
+            int coordY = _snake[0].Y;
+
+            switch (_currentDirection)
             {
-                if (i == 0)
+                case Direction.Left:
+                    //_snake[i].X--;
+                    coordX--;
+                    break;
+                case Direction.Right:
+                    //_snake[i].X++;
+                    coordX++;
+                    break;
+                case Direction.Up:
+                    //_snake[i].Y--;
+                    coordY--;
+                    break;
+                case Direction.Down:
+                    //_snake[i].Y++;
+                    coordY++;
+                    break;
+            }
+
+            // Check if the snake collides with itself 
+            for (int j = 1; j < _snake.Count; j++)
+            {
+                if (_snake[j].X == coordX && _snake[j].Y == coordY)
                 {
-                    switch (_currentDirection)
-                    {
-                        case Direction.Left:
-                            _snake[i].X--;
-                            break;
-                        case Direction.Right:
-                            _snake[i].X++;
-                            break;
-                        case Direction.Up:
-                            _snake[i].Y--;
-                            break;
-                        case Direction.Down:
-                            _snake[i].Y++;
-                            break;
-                    }
-
-                    // Check if the snake collides with itself 
-                    for (int j = 1; j < _snake.Count; j++)
-                    {
-                        if (_snake[j].X == _snake[i].X && _snake[j].Y == _snake[i].Y)
-                        {
-                            GameOver();
-                            return;
-                        }
-                    }
-
-                    // Check if the snake collides with the frame
-                    if (_snake[i].X < 0 ||
-                        _snake[i].Y < 0 ||
-                        _snake[i].X > _maxWidth ||
-                        _snake[i].Y > _maxHeight)
-                    {
-                        GameOver();
-                        return;
-                    }
-
-                    // Check if the snake ate something 
-                    if (_snake[0].X == _food.X && _snake[0].Y == _food.Y)
-                    {
-                        EatFood();
-                    }
+                    GameOver();
+                    return;
                 }
-                else
-                {
-                    _snake[i].X = _snake[i - 1].X;
-                    _snake[i].Y = _snake[i - 1].Y;
-                }
+            }
+
+            // Check if the snake collides with the frame
+            if (coordX < 0 ||
+                coordY< 0 ||
+                coordX > _maxWidth ||
+                coordY > _maxHeight)
+            {
+                GameOver();
+                return;
+            }
+
+            // Update snake
+            for (int i = _snake.Count - 1; i >= 1; i--)
+            {
+                _snake[i].X = _snake[i - 1].X;
+                _snake[i].Y = _snake[i - 1].Y;
+            }
+
+            _snake[0].X = coordX;
+            _snake[0].Y = coordY;
+
+            // Check if the snake ate something 
+            if (_snake[0].X == _food.X && _snake[0].Y == _food.Y)
+            {
+                EatFood();
             }
 
             picCanvas.Invalidate();
@@ -228,7 +234,7 @@ namespace Snake
         }
 
         private void RestartGame()
-        {
+        { 
             _maxWidth = picCanvas.Width / Settings.CellSize - 1;
             _maxHeight = picCanvas.Height / Settings.CellSize - 1;
 
