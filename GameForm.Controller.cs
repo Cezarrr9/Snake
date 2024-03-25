@@ -24,22 +24,31 @@ namespace Snake
         // Buttons from CD View
         private void btnEDif_Click(object sender, EventArgs e)
         {
+            gameTimer.Interval = 100;
+            lblDif.Text = "Mode: Easy";
+
             GameView();
-            gameTimer.Interval = 150;
+
             RestartGame();
         }
 
         private void btnMDif_Click(object sender, EventArgs e)
         {
+            gameTimer.Interval = 70;
+            lblDif.Text = "Mode: Medium";
+
             GameView();
-            gameTimer.Interval = 100;
+
             RestartGame();
         }
 
         private void btnHDif_Click(object sender, EventArgs e)
         {
+            gameTimer.Interval = 40;
+            lblDif.Text = "Mode: Hard";
+
             GameView();
-            gameTimer.Interval = 50;
+
             RestartGame();
         }
 
@@ -47,24 +56,6 @@ namespace Snake
         private void btnStart_Click(object sender, EventArgs e)
         {
             ChooseDifficultyView();
-        }
-
-        private void GameForm_Resize(object sender, EventArgs e)
-        {
-            CenterTitleLabel();
-            CenterStartButton();
-
-            CenterMediumButton();
-            CenterEasyButton();
-            CenterHardButton();
-            CenterCDLabel();
-
-            CenterCanvas();
-            PlaceScoreLabel();
-            PlaceHighscoreLabel();
-
-            PlacePlayAgainButton();
-            PlaceQuitButton();
         }
 
         private void GameForm_KeyDown(object sender, KeyEventArgs e)

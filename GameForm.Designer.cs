@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Snake
@@ -44,6 +45,7 @@ namespace Snake
             this.lblDifChoice = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.lblDif = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picCanvas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -164,7 +166,7 @@ namespace Snake
             this.btnStart.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStart.ForeColor = System.Drawing.Color.DarkOliveGreen;
-            this.btnStart.Location = new System.Drawing.Point(347, 34);
+            this.btnStart.Location = new System.Drawing.Point(43, 12);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(221, 64);
             this.btnStart.TabIndex = 11;
@@ -183,12 +185,24 @@ namespace Snake
             this.lblTitle.TabIndex = 12;
             this.lblTitle.Text = "Snake";
             // 
+            // lblDif
+            // 
+            this.lblDif.AutoSize = true;
+            this.lblDif.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDif.ForeColor = System.Drawing.Color.PaleGoldenrod;
+            this.lblDif.Location = new System.Drawing.Point(421, 98);
+            this.lblDif.Name = "lblDif";
+            this.lblDif.Size = new System.Drawing.Size(59, 24);
+            this.lblDif.TabIndex = 13;
+            this.lblDif.Text = "Mode";
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkOliveGreen;
             this.ClientSize = new System.Drawing.Size(984, 761);
+            this.Controls.Add(this.lblDif);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblDifChoice);
@@ -241,6 +255,9 @@ namespace Snake
             lblHighscore.Enabled = false;
             lblHighscore.Visible = false;
 
+            lblDif.Enabled = false;
+            lblDif.Visible = false;
+
             lblDifChoice.Enabled = false;
             lblDifChoice.Visible = false;
         }
@@ -277,6 +294,7 @@ namespace Snake
             CenterCanvas();
             PlaceScoreLabel();
             PlaceHighscoreLabel();
+            PlaceDifLabel();
 
             PlacePlayAgainButton();
             PlaceQuitButton();
@@ -301,6 +319,9 @@ namespace Snake
 
             lblHighscore.Enabled = true;
             lblHighscore.Visible = true;
+
+            lblDif.Enabled = true;
+            lblDif.Visible = true;
         }
 
         private void CenterStartButton()
@@ -356,6 +377,12 @@ namespace Snake
             lblHighscore.Top = picCanvas.Top - lblHighscore.Height - 5;
         }
 
+        private void PlaceDifLabel()
+        {
+            lblDif.Left = (lblHighscore.Left + lblScore.Left) / 2;
+            lblDif.Top = picCanvas.Top - lblDif.Height - 5;
+        }
+
         private void PlacePlayAgainButton()
         {
             btnPlayAgain.Left = picCanvas.Left + picCanvas.Width + 10;
@@ -366,6 +393,25 @@ namespace Snake
         {
             btnQuit.Left = picCanvas.Left + picCanvas.Width + 10;
             btnQuit.Top = picCanvas.Top + picCanvas.Height - btnQuit.Height; 
+        }
+
+        private void GameForm_Resize(object sender, EventArgs e)
+        {
+            CenterTitleLabel();
+            CenterStartButton();
+
+            CenterMediumButton();
+            CenterEasyButton();
+            CenterHardButton();
+            CenterCDLabel();
+
+            CenterCanvas();
+            PlaceScoreLabel();
+            PlaceHighscoreLabel();
+            PlaceDifLabel();
+
+            PlacePlayAgainButton();
+            PlaceQuitButton();
         }
 
         private void UpdateGraphics(object sender, PaintEventArgs e)
@@ -408,5 +454,6 @@ namespace Snake
         private System.Windows.Forms.Label lblDifChoice;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Label lblTitle;
+        private Label lblDif;
     }
 }
