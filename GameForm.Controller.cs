@@ -108,6 +108,37 @@ namespace Snake
                 }
                 return;
             }
+
+            if (e.KeyCode == Keys.Space)
+            {
+                if (_pauseFlag == false)
+                {
+                    _pauseFlag = true;
+
+                    gameTimer.Stop();
+
+                    btnPlayAgain.Enabled = true;
+                    btnPlayAgain.Text = "Restart Game";
+                    btnPlayAgain.Visible = true;
+
+                    btnQuit.Enabled = true;
+                    btnQuit.Visible = true;
+                }
+                else
+                {
+                    _pauseFlag = false;
+
+                    btnPlayAgain.Enabled = false;
+                    btnPlayAgain.Visible = false;
+                    btnPlayAgain.Text = "Play Again";
+                   
+                    btnQuit.Enabled = false;
+                    btnQuit.Visible = false;
+
+                    gameTimer.Start();
+                }
+                
+            }
         }
     }
 }

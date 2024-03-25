@@ -20,6 +20,7 @@ namespace Snake
         private int _highscore = 0;
 
         private bool _waitingFlag = false;
+        private bool _pauseFlag = false;
 
         private int _maxHeight;
         private int _maxWidth;
