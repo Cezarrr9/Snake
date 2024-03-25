@@ -26,18 +26,7 @@ namespace Snake
         {
             InitializeComponent();
             new Settings();
-
-            picCanvas.Enabled = false;
-            picCanvas.Visible = false;
-
-            btnPlayAgain.Enabled = false;
-            btnPlayAgain.Visible = false;
-
-            btnQuit.Enabled = false;
-            btnQuit.Visible = false;
-
-            lblScore.Visible = false;
-            lblHighscore.Visible = false;
+            StartGameView();
         }
 
         private void UpdateGraphics(object sender, PaintEventArgs e)
@@ -259,51 +248,31 @@ namespace Snake
             gameTimer.Start();
         }
 
-        private void HideDifView()
-        {
-            btnEDif.Enabled = false;
-            btnEDif.Visible = false;
-
-            btnMDif.Enabled = false;
-            btnMDif.Visible = false;
-
-            btnHDif.Enabled = false;
-            btnHDif.Visible = false;
-
-            lblDifChoice.Visible = false;
-        }
-
-        private void EnableGameView()
-        {
-            picCanvas.Enabled = true;
-            picCanvas.Visible = true;
-
-            lblScore.Visible = true;
-            lblHighscore.Visible = true;
-        }
 
         private void btnEDif_Click(object sender, EventArgs e)
         {
-            HideDifView();
-            EnableGameView();
+            GameView();
             gameTimer.Interval = 150;
             RestartGame();
         }
 
         private void btnMDif_Click(object sender, EventArgs e)
         {
-            HideDifView();
-            EnableGameView();
+            GameView();
             gameTimer.Interval = 100;
             RestartGame();
         }
 
         private void btnHDif_Click(object sender, EventArgs e)
         {
-            HideDifView();
-            EnableGameView();
+            GameView();
             gameTimer.Interval = 50;
             RestartGame();
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            ChooseDifficultyView();
         }
     }
 }

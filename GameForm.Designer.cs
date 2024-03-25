@@ -39,6 +39,8 @@
             this.btnMDif = new System.Windows.Forms.Button();
             this.btnHDif = new System.Windows.Forms.Button();
             this.lblDifChoice = new System.Windows.Forms.Label();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.lblTitle = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picCanvas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -148,11 +150,35 @@
             this.lblDifChoice.AutoSize = true;
             this.lblDifChoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDifChoice.ForeColor = System.Drawing.Color.PaleGoldenrod;
-            this.lblDifChoice.Location = new System.Drawing.Point(245, 199);
+            this.lblDifChoice.Location = new System.Drawing.Point(249, 201);
             this.lblDifChoice.Name = "lblDifChoice";
             this.lblDifChoice.Size = new System.Drawing.Size(503, 73);
             this.lblDifChoice.TabIndex = 10;
             this.lblDifChoice.Text = "Choose difficulty";
+            // 
+            // btnStart
+            // 
+            this.btnStart.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStart.ForeColor = System.Drawing.Color.DarkOliveGreen;
+            this.btnStart.Location = new System.Drawing.Point(347, 34);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(221, 64);
+            this.btnStart.TabIndex = 11;
+            this.btnStart.Text = "Start Game ";
+            this.btnStart.UseVisualStyleBackColor = false;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.PaleGoldenrod;
+            this.lblTitle.Location = new System.Drawing.Point(407, 466);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(321, 108);
+            this.lblTitle.TabIndex = 12;
+            this.lblTitle.Text = "Snake";
             // 
             // GameForm
             // 
@@ -160,6 +186,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkOliveGreen;
             this.ClientSize = new System.Drawing.Size(984, 761);
+            this.Controls.Add(this.lblTitle);
+            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblDifChoice);
             this.Controls.Add(this.btnHDif);
             this.Controls.Add(this.btnMDif);
@@ -180,6 +208,81 @@
 
         #endregion
 
+        private void StartGameView()
+        {
+            btnEDif.Enabled = false;
+            btnEDif.Visible = false;
+
+            btnMDif.Enabled = false;
+            btnMDif.Visible = false;
+
+            btnHDif.Enabled = false;
+            btnHDif.Visible = false;
+
+            btnPlayAgain.Enabled = false;
+            btnPlayAgain.Visible = false;
+
+            btnQuit.Enabled = false;
+            btnQuit.Visible = false;
+
+            picCanvas.Enabled = false;
+            picCanvas.Visible = false;
+
+            lblScore.Enabled = false;
+            lblScore.Visible = false;
+
+            lblHighscore.Enabled = false;
+            lblHighscore.Visible = false;
+
+            lblDifChoice.Enabled = false;
+            lblDifChoice.Visible = false;
+        }
+
+        private void ChooseDifficultyView()
+        {
+            btnEDif.Enabled = true;
+            btnEDif.Visible = true;
+
+            btnMDif.Enabled = true;
+            btnMDif.Visible = true;
+
+            btnHDif.Enabled = true;
+            btnHDif.Visible = true;
+
+            lblDifChoice.Enabled = true;
+            lblDifChoice.Visible = true;
+
+            lblTitle.Enabled = false;
+            lblTitle.Visible = false;
+
+            btnStart.Enabled = false;
+            btnStart.Visible = false;
+        }
+
+        private void GameView()
+        {
+            btnEDif.Enabled = false;
+            btnEDif.Visible = false;
+
+            btnMDif.Enabled = false;
+            btnMDif.Visible = false;
+
+            btnHDif.Enabled = false;
+            btnHDif.Visible = false;
+
+            lblDifChoice.Enabled = false;
+            lblDifChoice.Visible = false;
+
+            picCanvas.Enabled = true;
+            picCanvas.Visible = true;
+
+            lblScore.Enabled = true;
+            lblScore.Visible = true;
+
+            lblHighscore.Enabled = true;
+            lblHighscore.Visible = true;
+        }
+
         private System.Windows.Forms.PictureBox picCanvas;
         private System.Windows.Forms.Button btnPlayAgain;
         private System.Windows.Forms.Button btnQuit;
@@ -190,5 +293,7 @@
         private System.Windows.Forms.Button btnMDif;
         private System.Windows.Forms.Button btnHDif;
         private System.Windows.Forms.Label lblDifChoice;
+        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Label lblTitle;
     }
 }
