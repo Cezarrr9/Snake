@@ -20,7 +20,8 @@ namespace Snake
         private void btnStartGame_Click(object sender, EventArgs e)
         {
             Hide();
-            new GameForm().Show();
+            var gameForm = new GameForm();
+            gameForm.Show();
         }
     }
 }

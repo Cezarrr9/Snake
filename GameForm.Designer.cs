@@ -35,6 +35,10 @@
             this.lblScore = new System.Windows.Forms.Label();
             this.lblHighscore = new System.Windows.Forms.Label();
             this.gameTimer = new System.Windows.Forms.Timer(this.components);
+            this.btnEDif = new System.Windows.Forms.Button();
+            this.btnMDif = new System.Windows.Forms.Button();
+            this.btnHDif = new System.Windows.Forms.Button();
+            this.lblDifChoice = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picCanvas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,12 +104,66 @@
             // 
             this.gameTimer.Tick += new System.EventHandler(this.UpdateGame);
             // 
+            // btnEDif
+            // 
+            this.btnEDif.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.btnEDif.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEDif.ForeColor = System.Drawing.Color.DarkOliveGreen;
+            this.btnEDif.Location = new System.Drawing.Point(149, 325);
+            this.btnEDif.Name = "btnEDif";
+            this.btnEDif.Size = new System.Drawing.Size(161, 66);
+            this.btnEDif.TabIndex = 7;
+            this.btnEDif.Text = "Easy";
+            this.btnEDif.UseVisualStyleBackColor = false;
+            this.btnEDif.Click += new System.EventHandler(this.btnEDif_Click);
+            // 
+            // btnMDif
+            // 
+            this.btnMDif.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.btnMDif.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMDif.ForeColor = System.Drawing.Color.DarkOliveGreen;
+            this.btnMDif.Location = new System.Drawing.Point(410, 325);
+            this.btnMDif.Name = "btnMDif";
+            this.btnMDif.Size = new System.Drawing.Size(159, 66);
+            this.btnMDif.TabIndex = 8;
+            this.btnMDif.Text = "Medium";
+            this.btnMDif.UseVisualStyleBackColor = false;
+            this.btnMDif.Click += new System.EventHandler(this.btnMDif_Click);
+            // 
+            // btnHDif
+            // 
+            this.btnHDif.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.btnHDif.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHDif.ForeColor = System.Drawing.Color.DarkOliveGreen;
+            this.btnHDif.Location = new System.Drawing.Point(646, 325);
+            this.btnHDif.Name = "btnHDif";
+            this.btnHDif.Size = new System.Drawing.Size(157, 66);
+            this.btnHDif.TabIndex = 9;
+            this.btnHDif.Text = "Hard";
+            this.btnHDif.UseVisualStyleBackColor = false;
+            this.btnHDif.Click += new System.EventHandler(this.btnHDif_Click);
+            // 
+            // lblDifChoice
+            // 
+            this.lblDifChoice.AutoSize = true;
+            this.lblDifChoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDifChoice.ForeColor = System.Drawing.Color.PaleGoldenrod;
+            this.lblDifChoice.Location = new System.Drawing.Point(245, 199);
+            this.lblDifChoice.Name = "lblDifChoice";
+            this.lblDifChoice.Size = new System.Drawing.Size(503, 73);
+            this.lblDifChoice.TabIndex = 10;
+            this.lblDifChoice.Text = "Choose difficulty";
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkOliveGreen;
             this.ClientSize = new System.Drawing.Size(984, 761);
+            this.Controls.Add(this.lblDifChoice);
+            this.Controls.Add(this.btnHDif);
+            this.Controls.Add(this.btnMDif);
+            this.Controls.Add(this.btnEDif);
             this.Controls.Add(this.lblHighscore);
             this.Controls.Add(this.lblScore);
             this.Controls.Add(this.btnQuit);
@@ -128,5 +186,9 @@
         private System.Windows.Forms.Label lblScore;
         private System.Windows.Forms.Label lblHighscore;
         private System.Windows.Forms.Timer gameTimer;
+        private System.Windows.Forms.Button btnEDif;
+        private System.Windows.Forms.Button btnMDif;
+        private System.Windows.Forms.Button btnHDif;
+        private System.Windows.Forms.Label lblDifChoice;
     }
 }

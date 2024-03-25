@@ -26,7 +26,18 @@ namespace Snake
         {
             InitializeComponent();
             new Settings();
-            RestartGame();
+
+            picCanvas.Enabled = false;
+            picCanvas.Visible = false;
+
+            btnPlayAgain.Enabled = false;
+            btnPlayAgain.Visible = false;
+
+            btnQuit.Enabled = false;
+            btnQuit.Visible = false;
+
+            lblScore.Visible = false;
+            lblHighscore.Visible = false;
         }
 
         private void UpdateGraphics(object sender, PaintEventArgs e)
@@ -95,7 +106,18 @@ namespace Snake
                         if (_snake[j].X == _snake[i].X && _snake[j].Y == _snake[i].Y)
                         {
                             GameOver();
+                            return;
                         }
+                    }
+
+                    // Check if the snake collides with the frame
+                    if (_snake[i].X < 0 ||
+                        _snake[i].Y < 0 ||
+                        _snake[i].X > _maxWidth ||
+                        _snake[i].Y > _maxHeight)
+                    {
+                        GameOver();
+                        return;
                     }
 
                     // Check if the snake ate something 
@@ -109,16 +131,7 @@ namespace Snake
                     _snake[i].X = _snake[i - 1].X;
                     _snake[i].Y = _snake[i - 1].Y;
                 }
-                
-            }
 
-            // Check if the snake collides with the frame
-            if (_snake[0].X < 0 ||
-                _snake[0].Y < 0 ||
-                _snake[0].X > _maxWidth ||
-                _snake[0].Y > _maxHeight)
-            {
-                GameOver();
             }
 
             picCanvas.Invalidate();
@@ -244,6 +257,53 @@ namespace Snake
             PlaceFood();
 
             gameTimer.Start();
+        }
+
+        private void HideDifView()
+        {
+            btnEDif.Enabled = false;
+            btnEDif.Visible = false;
+
+            btnMDif.Enabled = false;
+            btnMDif.Visible = false;
+
+            btnHDif.Enabled = false;
+            btnHDif.Visible = false;
+
+            lblDifChoice.Visible = false;
+        }
+
+        private void EnableGameView()
+        {
+            picCanvas.Enabled = true;
+            picCanvas.Visible = true;
+
+            lblScore.Visible = true;
+            lblHighscore.Visible = true;
+        }
+
+        private void btnEDif_Click(object sender, EventArgs e)
+        {
+            HideDifView();
+            EnableGameView();
+            gameTimer.Interval = 150;
+            RestartGame();
+        }
+
+        private void btnMDif_Click(object sender, EventArgs e)
+        {
+            HideDifView();
+            EnableGameView();
+            gameTimer.Interval = 100;
+            RestartGame();
+        }
+
+        private void btnHDif_Click(object sender, EventArgs e)
+        {
+            HideDifView();
+            EnableGameView();
+            gameTimer.Interval = 50;
+            RestartGame();
         }
     }
 }
