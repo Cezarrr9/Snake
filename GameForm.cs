@@ -31,44 +31,6 @@ namespace Snake
             StartGameView();
         }
 
-        private void UpdateGraphics(object sender, PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-
-            Brush snakeColour;
-
-            for (int i = 0; i < _snake.Count; i++)
-            {
-                snakeColour = Brushes.DarkOliveGreen;
-
-                g.FillEllipse(snakeColour, new Rectangle(
-                    _snake[i].X * Settings.CellSize,
-                    _snake[i].Y * Settings.CellSize,
-                    Settings.CellSize,
-                    Settings.CellSize
-                ));
-            }
-
-            Brush foodColour = Brushes.Red;
-
-            g.FillEllipse(foodColour, new Rectangle(
-                _food.X * Settings.CellSize,
-                _food.Y * Settings.CellSize,
-                Settings.CellSize,
-                Settings.CellSize
-            ));
-        }
-
-        private void btnPlayAgain_Click(object sender, EventArgs e)
-        {
-            RestartGame();
-        }
-
-        private void btnQuit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
         private void UpdateGame(object sender, EventArgs e)
         {
             int coordX = _snake[0].X;
@@ -131,49 +93,6 @@ namespace Snake
             picCanvas.Invalidate();
         }
 
-        private void GameForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Up && _currentDirection != Direction.Down)
-            {
-                if (_waitingFlag == false)
-                {
-                    _currentDirection = Direction.Up;
-                    _waitingFlag = true;
-                }
-                return;
-            }
-
-            if (e.KeyCode == Keys.Down && _currentDirection != Direction.Up)
-            {
-                if (_waitingFlag == false)
-                {
-                    _currentDirection = Direction.Down;
-                    _waitingFlag = true;
-                }
-                return;
-            }
-
-            if (e.KeyCode == Keys.Right && _currentDirection != Direction.Left)
-            {
-                if (_waitingFlag == false)
-                {
-                    _currentDirection = Direction.Right;
-                    _waitingFlag = true;
-                }
-                return;
-            }
-
-            if (e.KeyCode == Keys.Left && _currentDirection != Direction.Right)
-            {
-                if (_waitingFlag == false)
-                {
-                    _currentDirection = Direction.Left;
-                    _waitingFlag = true;
-                }
-                return;
-            }
-        }
-
         private void EatFood()
         {
             _score++;
@@ -217,7 +136,6 @@ namespace Snake
             _food = new Unit { X = x, Y = y };
         }
 
-        
         private void PlaceSnake()
         {
             _snake.Clear();
@@ -246,11 +164,10 @@ namespace Snake
                 _highscore = _score;
                 lblHighscore.Text = $"Highscore: {_highscore}";
             }
-
         }
 
         private void RestartGame()
-        { 
+        {
             _maxWidth = picCanvas.Width / Settings.CellSize - 1;
             _maxHeight = picCanvas.Height / Settings.CellSize - 1;
 
@@ -267,51 +184,6 @@ namespace Snake
             PlaceFood();
 
             gameTimer.Start();
-        }
-
-
-        private void btnEDif_Click(object sender, EventArgs e)
-        {
-            GameView();
-            gameTimer.Interval = 150;
-            RestartGame();
-        }
-
-        private void btnMDif_Click(object sender, EventArgs e)
-        {
-            GameView();
-            gameTimer.Interval = 100;
-            RestartGame();
-        }
-
-        private void btnHDif_Click(object sender, EventArgs e)
-        {
-            GameView();
-            gameTimer.Interval = 50;
-            RestartGame();
-        }
-
-        private void btnStart_Click(object sender, EventArgs e)
-        {
-            ChooseDifficultyView();
-        }
-
-        private void GameForm_Resize(object sender, EventArgs e)
-        {
-            CenterTitleLabel();
-            CenterStartButton();
-
-            CenterMediumButton();
-            CenterEasyButton();
-            CenterHardButton();
-            CenterCDLabel();
-
-            CenterCanvas();
-            PlaceScoreLabel();
-            PlaceHighscoreLabel();
-
-            PlacePlayAgainButton();
-            PlaceQuitButton();
         }
     }
 }

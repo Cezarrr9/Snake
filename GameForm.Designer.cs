@@ -1,4 +1,7 @@
-﻿namespace Snake
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace Snake
 {
     partial class GameForm
     {
@@ -363,6 +366,34 @@
         {
             btnQuit.Left = picCanvas.Left + picCanvas.Width + 10;
             btnQuit.Top = picCanvas.Top + picCanvas.Height - btnQuit.Height; 
+        }
+
+        private void UpdateGraphics(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+
+            Brush snakeColour;
+
+            for (int i = 0; i < _snake.Count; i++)
+            {
+                snakeColour = Brushes.DarkOliveGreen;
+
+                g.FillEllipse(snakeColour, new Rectangle(
+                    _snake[i].X * Settings.CellSize,
+                    _snake[i].Y * Settings.CellSize,
+                    Settings.CellSize,
+                    Settings.CellSize
+                ));
+            }
+
+            Brush foodColour = Brushes.Red;
+
+            g.FillEllipse(foodColour, new Rectangle(
+                _food.X * Settings.CellSize,
+                _food.Y * Settings.CellSize,
+                Settings.CellSize,
+                Settings.CellSize
+            ));
         }
 
         private System.Windows.Forms.PictureBox picCanvas;
