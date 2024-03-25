@@ -200,6 +200,7 @@
             this.Name = "GameForm";
             this.Text = "Snake";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
+            this.Resize += new System.EventHandler(this.GameForm_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.picCanvas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -210,6 +211,9 @@
 
         private void StartGameView()
         {
+            CenterTitleLabel();
+            CenterStartButton();
+
             btnEDif.Enabled = false;
             btnEDif.Visible = false;
 
@@ -240,6 +244,12 @@
 
         private void ChooseDifficultyView()
         {
+            CenterMediumButton();
+            CenterEasyButton();
+            CenterHardButton();
+
+            CenterCDLabel();
+
             btnEDif.Enabled = true;
             btnEDif.Visible = true;
 
@@ -261,6 +271,13 @@
 
         private void GameView()
         {
+            CenterCanvas();
+            PlaceScoreLabel();
+            PlaceHighscoreLabel();
+
+            PlacePlayAgainButton();
+            PlaceQuitButton();
+
             btnEDif.Enabled = false;
             btnEDif.Visible = false;
 
@@ -281,6 +298,71 @@
 
             lblHighscore.Enabled = true;
             lblHighscore.Visible = true;
+        }
+
+        private void CenterStartButton()
+        {
+            btnStart.Left = (this.ClientSize.Width - btnStart.Width) / 2;
+            btnStart.Top = (this.ClientSize.Height - btnStart.Height) / 2;
+        }
+
+        private void CenterTitleLabel()
+        {
+            lblTitle.Left = (this.ClientSize.Width - lblTitle.Width) / 2;
+            lblTitle.Top = (this.ClientSize.Height - lblTitle.Height) / 2 - lblTitle.Height;
+        }
+
+        private void CenterMediumButton()
+        {
+            btnMDif.Left = (this.ClientSize.Width - btnMDif.Width) / 2;
+            btnMDif.Top = (this.ClientSize.Height - btnMDif.Height) / 2;
+        }
+
+        private void CenterEasyButton()
+        {
+            btnEDif.Left = btnMDif.Left - btnEDif.Width - 50;
+            btnEDif.Top = btnMDif.Top;
+        }
+
+        private void CenterHardButton()
+        {
+            btnHDif.Left = btnMDif.Left + btnHDif.Width + 50;
+            btnHDif.Top = btnMDif.Top;
+        }
+        private void CenterCDLabel()
+        {
+            lblDifChoice.Left = (this.ClientSize.Width - lblDifChoice.Width) / 2;
+            lblDifChoice.Top = (this.ClientSize.Height - lblDifChoice.Height) / 2 - btnMDif.Height - 50;
+        }
+
+        private void CenterCanvas()
+        {
+            picCanvas.Left = (this.ClientSize.Width - picCanvas.Width) / 2;
+            picCanvas.Top = (this.ClientSize.Height - picCanvas.Height) / 2;
+        }
+
+        private void PlaceScoreLabel()
+        {
+            lblScore.Left = picCanvas.Left;
+            lblScore.Top = picCanvas.Top - lblScore.Height - 5;
+        }
+
+        private void PlaceHighscoreLabel()
+        {
+            lblHighscore.Left = picCanvas.Left + picCanvas.Width - lblHighscore.Width;
+            lblHighscore.Top = picCanvas.Top - lblHighscore.Height - 5;
+        }
+
+        private void PlacePlayAgainButton()
+        {
+            btnPlayAgain.Left = picCanvas.Left + picCanvas.Width + 10;
+            btnPlayAgain.Top = picCanvas.Top;
+        }
+
+        private void PlaceQuitButton()
+        {
+            btnQuit.Left = picCanvas.Left + picCanvas.Width + 10;
+            btnQuit.Top = picCanvas.Top + picCanvas.Height - btnQuit.Height; 
         }
 
         private System.Windows.Forms.PictureBox picCanvas;

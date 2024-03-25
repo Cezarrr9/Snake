@@ -120,7 +120,6 @@ namespace Snake
                     _snake[i].X = _snake[i - 1].X;
                     _snake[i].Y = _snake[i - 1].Y;
                 }
-
             }
 
             picCanvas.Invalidate();
@@ -273,6 +272,24 @@ namespace Snake
         private void btnStart_Click(object sender, EventArgs e)
         {
             ChooseDifficultyView();
+        }
+
+        private void GameForm_Resize(object sender, EventArgs e)
+        {
+            CenterTitleLabel();
+            CenterStartButton();
+
+            CenterMediumButton();
+            CenterEasyButton();
+            CenterHardButton();
+            CenterCDLabel();
+
+            CenterCanvas();
+            PlaceScoreLabel();
+            PlaceHighscoreLabel();
+
+            PlacePlayAgainButton();
+            PlaceQuitButton();
         }
     }
 }
