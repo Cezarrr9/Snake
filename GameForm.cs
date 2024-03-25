@@ -19,6 +19,8 @@ namespace Snake
         private int _score = 0;
         private int _highscore = 0;
 
+        private bool _waitingFlag = false;
+
         private int _maxHeight;
         private int _maxWidth;
 
@@ -75,19 +77,15 @@ namespace Snake
             switch (_currentDirection)
             {
                 case Direction.Left:
-                    //_snake[i].X--;
                     coordX--;
                     break;
                 case Direction.Right:
-                    //_snake[i].X++;
                     coordX++;
                     break;
                 case Direction.Up:
-                    //_snake[i].Y--;
                     coordY--;
                     break;
                 case Direction.Down:
-                    //_snake[i].Y++;
                     coordY++;
                     break;
             }
@@ -128,6 +126,8 @@ namespace Snake
                 EatFood();
             }
 
+            _waitingFlag = false;
+            
             picCanvas.Invalidate();
         }
 
@@ -135,25 +135,41 @@ namespace Snake
         {
             if (e.KeyCode == Keys.Up && _currentDirection != Direction.Down)
             {
-                _currentDirection = Direction.Up;
+                if (_waitingFlag == false)
+                {
+                    _currentDirection = Direction.Up;
+                    _waitingFlag = true;
+                }
                 return;
             }
 
             if (e.KeyCode == Keys.Down && _currentDirection != Direction.Up)
             {
-                _currentDirection = Direction.Down;
+                if (_waitingFlag == false)
+                {
+                    _currentDirection = Direction.Down;
+                    _waitingFlag = true;
+                }
                 return;
             }
 
             if (e.KeyCode == Keys.Right && _currentDirection != Direction.Left)
             {
-                _currentDirection = Direction.Right;
+                if (_waitingFlag == false)
+                {
+                    _currentDirection = Direction.Right;
+                    _waitingFlag = true;
+                }
                 return;
             }
 
             if (e.KeyCode == Keys.Left && _currentDirection != Direction.Right)
             {
-                _currentDirection = Direction.Left;
+                if (_waitingFlag == false)
+                {
+                    _currentDirection = Direction.Left;
+                    _waitingFlag = true;
+                }
                 return;
             }
         }
