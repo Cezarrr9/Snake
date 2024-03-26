@@ -139,7 +139,7 @@ namespace Snake
 
             if (e.KeyCode == Keys.Space)
             {
-                if (_pauseFlag == false)
+                if (_pauseFlag == false && gameTimer.Enabled)
                 {
                     gameTimer.Stop();
 
@@ -158,7 +158,7 @@ namespace Snake
                     btnDecreaseDif.Enabled = true;
                     btnDecreaseDif.Visible = true;
                 }
-                else
+                else if (_pauseFlag == true)
                 {
                     _pauseFlag = false;
 
