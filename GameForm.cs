@@ -14,8 +14,11 @@ namespace Snake
     public partial class GameForm : Form
     {
         private List<Unit> _snake = new List<Unit>();
-        private Direction _currentDirection = Direction.Right;
         private Unit _food = new Unit();
+
+        private Direction _currentDirection = Direction.Right;
+        private int _cellSize = 20;
+
         private int _score = 0;
         private int _highscoreEasy = 0;
         private int _highscoreMedium = 0;
@@ -30,7 +33,6 @@ namespace Snake
         public GameForm()
         {
             InitializeComponent();
-            new Settings();
             StartGameView();
         }
 
@@ -196,13 +198,14 @@ namespace Snake
 
         private void RestartGame()
         {
-            _maxWidth = picCanvas.Width / Settings.CellSize - 1;
-            _maxHeight = picCanvas.Height / Settings.CellSize - 1;
+            _maxWidth = picCanvas.Width / _cellSize - 1;
+            _maxHeight = picCanvas.Height / _cellSize - 1;
 
             btnPlayAgain.Enabled = false;
-            btnQuit.Enabled = false;
-
             btnPlayAgain.Visible = false;
+            btnPlayAgain.Text = "Play Again";
+
+            btnQuit.Enabled = false;
             btnQuit.Visible = false;
 
             btnDecreaseDif.Enabled = false;

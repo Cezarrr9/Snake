@@ -477,20 +477,20 @@ namespace Snake
                 snakeColour = Brushes.DarkOliveGreen;
 
                 g.FillEllipse(snakeColour, new Rectangle(
-                    _snake[i].X * Settings.CellSize,
-                    _snake[i].Y * Settings.CellSize,
-                    Settings.CellSize,
-                    Settings.CellSize
+                    _snake[i].X * _cellSize,
+                    _snake[i].Y * _cellSize,
+                    _cellSize,
+                    _cellSize
                 ));
             }
 
             Brush foodColour = Brushes.Red;
 
             g.FillEllipse(foodColour, new Rectangle(
-                _food.X * Settings.CellSize,
-                _food.Y * Settings.CellSize,
-                Settings.CellSize,
-                Settings.CellSize
+                _food.X * _cellSize,
+                _food.Y * _cellSize,
+                _cellSize,
+                _cellSize
             ));
         }
 
