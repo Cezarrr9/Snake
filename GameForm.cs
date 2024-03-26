@@ -154,6 +154,12 @@ namespace Snake
 
             btnQuit.Enabled = true;
             btnQuit.Visible = true;
+
+            btnDecreaseDif.Enabled = true;
+            btnDecreaseDif.Visible = true;
+
+            btnIncreaseDif.Enabled = true;
+            btnIncreaseDif.Visible = true;
         }
 
         private void GameOver()
@@ -178,8 +184,16 @@ namespace Snake
             btnPlayAgain.Visible = false;
             btnQuit.Visible = false;
 
+            btnDecreaseDif.Enabled = false;
+            btnDecreaseDif.Visible = false;
+
+            btnIncreaseDif.Enabled = false;
+            btnIncreaseDif.Visible = false;
+
             _score = 0;
             lblScore.Text = $"Score: {_score}";
+
+            _pauseFlag = false;
 
             PlaceSnake();
             PlaceFood();

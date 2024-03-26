@@ -21,6 +21,42 @@ namespace Snake
             Application.Exit();
         }
 
+        private void btnIncreaseDif_Click(object sender, EventArgs e)
+        {
+            if (gameTimer.Interval != 40)
+            {
+                gameTimer.Interval -= 30;
+                if (gameTimer.Interval == 40)
+                {
+                    lblDif.Text = "Mode: Hard";
+                }
+                else
+                {
+                    lblDif.Text = "Mode: Medium";
+                }
+            }
+
+            RestartGame();
+        }
+
+        private void btnDecreaseDif_Click(object sender, EventArgs e)
+        {
+            if (gameTimer.Interval != 100)
+            {
+                gameTimer.Interval += 30;
+                if (gameTimer.Interval == 100)
+                {
+                    lblDif.Text = "Mode: Easy";
+                }
+                else
+                {
+                    lblDif.Text = "Mode: Medium";
+                }
+            }
+
+            RestartGame();
+        }
+
         // Buttons from CD View
         private void btnEDif_Click(object sender, EventArgs e)
         {
@@ -58,6 +94,7 @@ namespace Snake
             ChooseDifficultyView();
         }
 
+        // Key down control
         private void GameForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Up && _currentDirection != Direction.Down)
@@ -104,9 +141,9 @@ namespace Snake
             {
                 if (_pauseFlag == false)
                 {
-                    _pauseFlag = true;
-
                     gameTimer.Stop();
+
+                    _pauseFlag = true;
 
                     btnPlayAgain.Enabled = true;
                     btnPlayAgain.Text = "Restart Game";
@@ -114,6 +151,12 @@ namespace Snake
 
                     btnQuit.Enabled = true;
                     btnQuit.Visible = true;
+
+                    btnIncreaseDif.Enabled = true;
+                    btnIncreaseDif.Visible = true;
+
+                    btnDecreaseDif.Enabled = true;
+                    btnDecreaseDif.Visible = true;
                 }
                 else
                 {
@@ -122,13 +165,19 @@ namespace Snake
                     btnPlayAgain.Enabled = false;
                     btnPlayAgain.Visible = false;
                     btnPlayAgain.Text = "Play Again";
-                   
+
                     btnQuit.Enabled = false;
                     btnQuit.Visible = false;
 
+                    btnIncreaseDif.Enabled = false;
+                    btnIncreaseDif.Visible = false;
+
+                    btnDecreaseDif.Enabled = false;
+                    btnDecreaseDif.Visible = false;
+
                     gameTimer.Start();
                 }
-                
+                return;
             }
         }
     }

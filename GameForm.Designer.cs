@@ -46,6 +46,8 @@ namespace Snake
             this.btnStart = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblDif = new System.Windows.Forms.Label();
+            this.btnDecreaseDif = new System.Windows.Forms.Button();
+            this.btnIncreaseDif = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picCanvas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -196,12 +198,40 @@ namespace Snake
             this.lblDif.TabIndex = 13;
             this.lblDif.Text = "Mode";
             // 
+            // btnDecreaseDif
+            // 
+            this.btnDecreaseDif.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.btnDecreaseDif.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDecreaseDif.ForeColor = System.Drawing.Color.DarkOliveGreen;
+            this.btnDecreaseDif.Location = new System.Drawing.Point(31, 518);
+            this.btnDecreaseDif.Name = "btnDecreaseDif";
+            this.btnDecreaseDif.Size = new System.Drawing.Size(161, 107);
+            this.btnDecreaseDif.TabIndex = 16;
+            this.btnDecreaseDif.Text = "Decrease Difficulty";
+            this.btnDecreaseDif.UseVisualStyleBackColor = false;
+            this.btnDecreaseDif.Click += new System.EventHandler(this.btnDecreaseDif_Click);
+            // 
+            // btnIncreaseDif
+            // 
+            this.btnIncreaseDif.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.btnIncreaseDif.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIncreaseDif.ForeColor = System.Drawing.Color.DarkOliveGreen;
+            this.btnIncreaseDif.Location = new System.Drawing.Point(31, 126);
+            this.btnIncreaseDif.Name = "btnIncreaseDif";
+            this.btnIncreaseDif.Size = new System.Drawing.Size(161, 107);
+            this.btnIncreaseDif.TabIndex = 17;
+            this.btnIncreaseDif.Text = "Increase Difficulty";
+            this.btnIncreaseDif.UseVisualStyleBackColor = false;
+            this.btnIncreaseDif.Click += new System.EventHandler(this.btnIncreaseDif_Click);
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkOliveGreen;
             this.ClientSize = new System.Drawing.Size(984, 761);
+            this.Controls.Add(this.btnIncreaseDif);
+            this.Controls.Add(this.btnDecreaseDif);
             this.Controls.Add(this.lblDif);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnStart);
@@ -245,6 +275,12 @@ namespace Snake
 
             btnQuit.Enabled = false;
             btnQuit.Visible = false;
+
+            btnDecreaseDif.Enabled = false;
+            btnDecreaseDif.Visible = false;
+
+            btnIncreaseDif.Enabled = false; 
+            btnIncreaseDif.Visible = false;
 
             picCanvas.Enabled = false;
             picCanvas.Visible = false;
@@ -298,6 +334,8 @@ namespace Snake
 
             PlacePlayAgainButton();
             PlaceQuitButton();
+            PlaceDecreaseDifButton();
+            PlaceIncreaseDifButton();
 
             btnEDif.Enabled = false;
             btnEDif.Visible = false;
@@ -395,6 +433,18 @@ namespace Snake
             btnQuit.Top = picCanvas.Top + picCanvas.Height - btnQuit.Height; 
         }
 
+        private void PlaceIncreaseDifButton()
+        {
+            btnIncreaseDif.Left = picCanvas.Left - btnIncreaseDif.Width - 10;
+            btnIncreaseDif.Top = picCanvas.Top;
+        }
+
+        private void PlaceDecreaseDifButton()
+        {
+            btnDecreaseDif.Left = picCanvas.Left - btnIncreaseDif.Width - 10;
+            btnDecreaseDif.Top = picCanvas.Top + picCanvas.Height - btnDecreaseDif.Height;
+        }
+
         private void GameForm_Resize(object sender, EventArgs e)
         {
             CenterTitleLabel();
@@ -412,6 +462,8 @@ namespace Snake
 
             PlacePlayAgainButton();
             PlaceQuitButton();
+            PlaceIncreaseDifButton();
+            PlaceDecreaseDifButton();
         }
 
         private void UpdateGraphics(object sender, PaintEventArgs e)
@@ -455,5 +507,7 @@ namespace Snake
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Label lblTitle;
         private Label lblDif;
+        private Button btnDecreaseDif;
+        private Button btnIncreaseDif;
     }
 }
