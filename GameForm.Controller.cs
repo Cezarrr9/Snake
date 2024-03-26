@@ -92,10 +92,16 @@ namespace Snake
             RestartGame();
         }
 
+        // Button from Rules view
+        private void btnReady_Click(object sender, EventArgs e)
+        {
+            ChooseDifficultyView();
+        }
+
         // Button from the Start Game View
         private void btnStart_Click(object sender, EventArgs e)
         {
-            ChooseDifficultyView();
+            RulesView();
         }
 
         // Key down control

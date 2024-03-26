@@ -33,6 +33,7 @@ namespace Snake
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameForm));
             this.picCanvas = new System.Windows.Forms.PictureBox();
             this.btnPlayAgain = new System.Windows.Forms.Button();
             this.btnQuit = new System.Windows.Forms.Button();
@@ -48,6 +49,9 @@ namespace Snake
             this.lblDif = new System.Windows.Forms.Label();
             this.btnDecreaseDif = new System.Windows.Forms.Button();
             this.btnIncreaseDif = new System.Windows.Forms.Button();
+            this.lblInstructions = new System.Windows.Forms.Label();
+            this.tbInstr = new System.Windows.Forms.TextBox();
+            this.btnReady = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picCanvas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -224,12 +228,52 @@ namespace Snake
             this.btnIncreaseDif.UseVisualStyleBackColor = false;
             this.btnIncreaseDif.Click += new System.EventHandler(this.btnIncreaseDif_Click);
             // 
+            // lblInstructions
+            // 
+            this.lblInstructions.AutoSize = true;
+            this.lblInstructions.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInstructions.ForeColor = System.Drawing.Color.PaleGoldenrod;
+            this.lblInstructions.Location = new System.Drawing.Point(328, 25);
+            this.lblInstructions.Name = "lblInstructions";
+            this.lblInstructions.Size = new System.Drawing.Size(361, 73);
+            this.lblInstructions.TabIndex = 18;
+            this.lblInstructions.Text = "Instructions";
+            // 
+            // tbInstr
+            // 
+            this.tbInstr.BackColor = System.Drawing.Color.DarkOliveGreen;
+            this.tbInstr.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbInstr.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbInstr.ForeColor = System.Drawing.Color.PaleGoldenrod;
+            this.tbInstr.Location = new System.Drawing.Point(112, 277);
+            this.tbInstr.Multiline = true;
+            this.tbInstr.Name = "tbInstr";
+            this.tbInstr.ReadOnly = true;
+            this.tbInstr.Size = new System.Drawing.Size(772, 316);
+            this.tbInstr.TabIndex = 19;
+            // 
+            // btnReady
+            // 
+            this.btnReady.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.btnReady.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReady.ForeColor = System.Drawing.Color.DarkOliveGreen;
+            this.btnReady.Location = new System.Drawing.Point(354, 652);
+            this.btnReady.Name = "btnReady";
+            this.btnReady.Size = new System.Drawing.Size(231, 66);
+            this.btnReady.TabIndex = 20;
+            this.btnReady.Text = "I\'m ready!";
+            this.btnReady.UseVisualStyleBackColor = false;
+            this.btnReady.Click += new System.EventHandler(this.btnReady_Click);
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkOliveGreen;
             this.ClientSize = new System.Drawing.Size(984, 761);
+            this.Controls.Add(this.btnReady);
+            this.Controls.Add(this.tbInstr);
+            this.Controls.Add(this.lblInstructions);
             this.Controls.Add(this.btnIncreaseDif);
             this.Controls.Add(this.btnDecreaseDif);
             this.Controls.Add(this.lblDif);
@@ -244,6 +288,7 @@ namespace Snake
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.btnPlayAgain);
             this.Controls.Add(this.picCanvas);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GameForm";
             this.Text = "Snake";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
@@ -282,6 +327,9 @@ namespace Snake
             btnIncreaseDif.Enabled = false; 
             btnIncreaseDif.Visible = false;
 
+            btnReady.Enabled = false;
+            btnReady.Visible = false;
+
             picCanvas.Enabled = false;
             picCanvas.Visible = false;
 
@@ -296,6 +344,36 @@ namespace Snake
 
             lblDifChoice.Enabled = false;
             lblDifChoice.Visible = false;
+
+            lblInstructions.Enabled = false;
+            lblInstructions.Visible = false;
+
+            tbInstr.Enabled = false;
+            tbInstr.Visible = false;
+        }
+
+        private void RulesView()
+        {
+            CenterTextBox();
+            CenterInstructionsLabel();
+            CenterReadyButton();
+
+            SetInstructions();
+
+            lblTitle.Enabled = false;
+            lblTitle.Visible = false;
+
+            btnStart.Enabled = false;
+            btnStart.Visible = false;
+
+            lblInstructions.Enabled = true;
+            lblInstructions.Visible = true;
+
+            tbInstr.Enabled = true;
+            tbInstr.Visible = true;
+
+            btnReady.Enabled = true;
+            btnReady.Visible = true;
         }
 
         private void ChooseDifficultyView()
@@ -315,14 +393,17 @@ namespace Snake
             btnHDif.Enabled = true;
             btnHDif.Visible = true;
 
+            btnReady.Enabled = false;
+            btnReady.Visible = false;
+
             lblDifChoice.Enabled = true;
             lblDifChoice.Visible = true;
 
-            lblTitle.Enabled = false;
-            lblTitle.Visible = false;
+            lblInstructions.Enabled = false;
+            lblInstructions.Visible = false;
 
-            btnStart.Enabled = false;
-            btnStart.Visible = false;
+            tbInstr.Enabled = false;
+            tbInstr.Visible = false;
         }
 
         private void GameView()
@@ -362,6 +443,19 @@ namespace Snake
             lblDif.Visible = true;
         }
 
+        private void SetInstructions()
+        {
+            tbInstr.Text = "1. The goal of the game is to grow your snake as much as possible@" +
+                "2. To do that you have to point the head of the snake towards the food@" +
+                "3. You can do that by using the arrows@" +
+                "4. There are three difficulties available (the higher the difficulty the higher the speed of the snake)@" +
+                "5. There is a highscore for each difficulty@" +
+                "6. You lose the game once the snake bumps into the frame or in itself@" +
+                "7. You can pause the game any time by pressing the spacebar (and unpause it using the same method)@" +
+                "8. You are also able to change the difficulty after you start playing";
+            tbInstr.Text = tbInstr.Text.Replace("@", System.Environment.NewLine);
+        }
+
         private void CenterStartButton()
         {
             btnStart.Left = (this.ClientSize.Width - btnStart.Width) / 2;
@@ -372,6 +466,24 @@ namespace Snake
         {
             lblTitle.Left = (this.ClientSize.Width - lblTitle.Width) / 2;
             lblTitle.Top = (this.ClientSize.Height - lblTitle.Height) / 2 - lblTitle.Height;
+        }
+
+        private void CenterTextBox()
+        {
+            tbInstr.Left = (this.ClientSize.Width - tbInstr.Width) / 2;
+            tbInstr.Top = (this.ClientSize.Height - tbInstr.Height) / 2 + 30;
+        }
+
+        private void CenterInstructionsLabel()
+        {
+            lblInstructions.Left = (this.ClientSize.Width - lblInstructions.Width) / 2;
+            lblInstructions.Top = tbInstr.Top - lblInstructions.Height - 10;
+        }
+
+        private void CenterReadyButton()
+        {
+            btnReady.Left = (this.ClientSize.Width -btnReady.Width) / 2;
+            btnReady.Top = tbInstr.Top + tbInstr.Height + 10;
         }
 
         private void CenterMediumButton()
@@ -450,6 +562,9 @@ namespace Snake
             CenterTitleLabel();
             CenterStartButton();
 
+            CenterTextBox();
+            CenterInstructionsLabel();
+
             CenterMediumButton();
             CenterEasyButton();
             CenterHardButton();
@@ -509,5 +624,8 @@ namespace Snake
         private Label lblDif;
         private Button btnDecreaseDif;
         private Button btnIncreaseDif;
+        private Label lblInstructions;
+        private TextBox tbInstr;
+        private Button btnReady;
     }
 }
