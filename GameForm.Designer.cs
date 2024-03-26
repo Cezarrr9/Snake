@@ -52,6 +52,7 @@ namespace Snake
             this.lblInstructions = new System.Windows.Forms.Label();
             this.tbInstr = new System.Windows.Forms.TextBox();
             this.btnReady = new System.Windows.Forms.Button();
+            this.lblWinner = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picCanvas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,7 +61,7 @@ namespace Snake
             this.picCanvas.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.picCanvas.Location = new System.Drawing.Point(198, 125);
             this.picCanvas.Name = "picCanvas";
-            this.picCanvas.Size = new System.Drawing.Size(581, 501);
+            this.picCanvas.Size = new System.Drawing.Size(561, 456);
             this.picCanvas.TabIndex = 0;
             this.picCanvas.TabStop = false;
             this.picCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.UpdateGraphics);
@@ -265,12 +266,24 @@ namespace Snake
             this.btnReady.UseVisualStyleBackColor = false;
             this.btnReady.Click += new System.EventHandler(this.btnReady_Click);
             // 
+            // lblWinner
+            // 
+            this.lblWinner.AutoSize = true;
+            this.lblWinner.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWinner.ForeColor = System.Drawing.Color.PaleGoldenrod;
+            this.lblWinner.Location = new System.Drawing.Point(71, 126);
+            this.lblWinner.Name = "lblWinner";
+            this.lblWinner.Size = new System.Drawing.Size(864, 108);
+            this.lblWinner.TabIndex = 21;
+            this.lblWinner.Text = "You are the GOAT!";
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkOliveGreen;
             this.ClientSize = new System.Drawing.Size(984, 761);
+            this.Controls.Add(this.lblWinner);
             this.Controls.Add(this.btnReady);
             this.Controls.Add(this.tbInstr);
             this.Controls.Add(this.lblInstructions);
@@ -348,6 +361,9 @@ namespace Snake
             lblInstructions.Enabled = false;
             lblInstructions.Visible = false;
 
+            lblWinner.Enabled = false;
+            lblWinner.Visible = false;
+
             tbInstr.Enabled = false;
             tbInstr.Visible = false;
         }
@@ -396,11 +412,17 @@ namespace Snake
             btnReady.Enabled = false;
             btnReady.Visible = false;
 
+            btnQuit.Enabled = false;
+            btnQuit.Visible = false;
+
             lblDifChoice.Enabled = true;
             lblDifChoice.Visible = true;
 
             lblInstructions.Enabled = false;
             lblInstructions.Visible = false;
+
+            lblWinner.Enabled = false;
+            lblWinner.Visible = false;
 
             tbInstr.Enabled = false;
             tbInstr.Visible = false;
@@ -441,6 +463,34 @@ namespace Snake
 
             lblDif.Enabled = true;
             lblDif.Visible = true;
+        }
+
+        private void WinningView()
+        {
+            CenterWinningLabel();
+            PlaceWinningViewButtons();
+
+            picCanvas.Enabled = false;
+            picCanvas.Visible = false;
+
+            lblScore.Enabled = false;
+            lblScore.Visible = false;
+
+            lblHighscore.Enabled = false;
+            lblHighscore.Visible = false;
+
+            lblDif.Enabled = false;
+            lblDif.Visible = false;
+
+            lblWinner.Enabled = true;
+            lblWinner.Visible = true;
+
+            btnStart.Text = "Play Again";
+            btnStart.Enabled = true;
+            btnStart.Visible = true;
+
+            btnQuit.Enabled = true;
+            btnQuit.Visible = true;
         }
 
         private void SetInstructions()
@@ -557,6 +607,24 @@ namespace Snake
             btnDecreaseDif.Top = picCanvas.Top + picCanvas.Height - btnDecreaseDif.Height;
         }
 
+        private void CenterWinningLabel()
+        {
+            lblWinner.Left = (this.ClientSize.Width -  lblWinner.Width) / 2;
+            lblWinner.Top = (this.ClientSize.Height - lblWinner.Height) / 2 - 115;
+        }
+
+        private void PlaceWinningViewButtons()
+        {
+            btnStart.Height = btnQuit.Height;
+            btnStart.Width = btnQuit.Width;
+
+            btnQuit.Left = (this.ClientSize.Width - btnQuit.Width) / 2 + btnQuit.Width;
+            btnQuit.Top = lblWinner.Top + lblWinner.Height + 30;
+            
+            btnStart.Left = (this.ClientSize.Width - btnStart.Width) / 2 - btnStart.Width;
+            btnStart.Top = lblWinner.Top + lblWinner.Height + 30;
+        }
+
         private void GameForm_Resize(object sender, EventArgs e)
         {
             CenterTitleLabel();
@@ -627,5 +695,6 @@ namespace Snake
         private Label lblInstructions;
         private TextBox tbInstr;
         private Button btnReady;
+        private Label lblWinner;
     }
 }

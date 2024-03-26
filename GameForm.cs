@@ -17,7 +17,7 @@ namespace Snake
         private Unit _food = new Unit();
 
         private Direction _currentDirection = Direction.Right;
-        private int _cellSize = 20;
+        private int _cellSize = 35;
 
         private int _score = 0;
         private int _highscoreEasy = 0;
@@ -101,6 +101,12 @@ namespace Snake
         private void EatFood()
         {
             _score++;
+            
+            if (_score == ((picCanvas.Width - 1) / _cellSize) * ((picCanvas.Height - 1) / _cellSize) - 2) 
+            {
+                gameTimer.Stop();
+                WinningView();
+            }
 
             lblScore.Text = $"Score: {_score}";
 
