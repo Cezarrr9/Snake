@@ -17,7 +17,9 @@ namespace Snake
         private Direction _currentDirection = Direction.Right;
         private Unit _food = new Unit();
         private int _score = 0;
-        private int _highscore = 0;
+        private int _highscoreEasy = 0;
+        private int _highscoreMedium = 0;
+        private int _highscoreHard = 0;
 
         private bool _waitingFlag = false;
         private bool _pauseFlag = false;
@@ -166,10 +168,29 @@ namespace Snake
         {
             GameStopped();
 
-            if (_score > _highscore)
+            switch (lblDif.Text)
             {
-                _highscore = _score;
-                lblHighscore.Text = $"Highscore: {_highscore}";
+                case "Mode: Easy":
+                    if (_score > _highscoreEasy)
+                    {
+                        _highscoreEasy = _score;
+                        lblHighscore.Text = $"Highscore: {_highscoreEasy}";
+                    }
+                    break;
+                case "Mode: Medium":
+                    if (_score > _highscoreMedium)
+                    {
+                        _highscoreMedium = _score;
+                        lblHighscore.Text = $"Highscore: {_highscoreMedium}";
+                    }
+                    break;
+                case "Mode: Hard":
+                    if (_score > _highscoreHard)
+                    {
+                        _highscoreHard = _score;
+                        lblHighscore.Text = $"Highscore: {_highscoreHard}";
+                    }
+                    break;
             }
         }
 
