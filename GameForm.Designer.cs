@@ -534,8 +534,6 @@ namespace Snake
 
             btnIncreaseDif.Enabled = false;
             btnIncreaseDif.Visible = false;
-
-            lblScore.Text = $"Score: 0";
         }
 
         /// <summary>

@@ -184,6 +184,42 @@ namespace Snake
             }
         }
 
+        private void IncreaseDif()
+        {
+            if (gameTimer.Interval != 40)
+            {
+                gameTimer.Interval -= 30;
+                if (gameTimer.Interval == 40)
+                {
+                    lblDif.Text = "Mode: Hard";
+                    lblHighscore.Text = $"Highscore: {_highscoreHard}";
+                }
+                else
+                {
+                    lblDif.Text = "Mode: Medium";
+                    lblHighscore.Text = $"Highscore: {_highscoreMedium}";
+                }
+            }
+        }
+
+        private void DecreaseDif()
+        {
+            if (gameTimer.Interval != 100)
+            {
+                gameTimer.Interval += 30;
+                if (gameTimer.Interval == 100)
+                {
+                    lblDif.Text = "Mode: Easy";
+                    lblHighscore.Text = $"Highscore: {_highscoreEasy}";
+                }
+                else
+                {
+                    lblDif.Text = "Mode: Medium";
+                    lblHighscore.Text = $"Highscore: {_highscoreMedium}";
+                }
+            }
+        }
+
         private void RestartGame()
         {
             _maxWidth = picCanvas.Width / _cellSize - 1;
@@ -192,6 +228,8 @@ namespace Snake
             RestartGameView();
 
             _score = 0;
+            lblScore.Text = "Score: 0";
+
             _pauseFlag = false;
 
             PlaceSnake();
