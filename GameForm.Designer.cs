@@ -313,7 +313,10 @@ namespace Snake
         }
 
         #endregion
-
+        
+        /// <summary>
+        /// Displays the first view the player sees.
+        /// </summary>
         private void StartGameView()
         {
             CenterTitleLabel();
@@ -368,6 +371,9 @@ namespace Snake
             tbInstr.Visible = false;
         }
 
+        /// <summary>
+        /// Displays the rules/instructions of the game.
+        /// </summary>
         private void RulesView()
         {
             CenterTextBox();
@@ -401,6 +407,9 @@ namespace Snake
             btnReady.Visible = true;
         }
 
+        /// <summary>
+        /// Displays options regarding the difficulty of the game. 
+        /// </summary>
         private void ChooseDifficultyView()
         {
             CenterMediumButton();
@@ -437,6 +446,9 @@ namespace Snake
             tbInstr.Visible = false;
         }
 
+        /// <summary>
+        /// Displays the main view which contains the game.
+        /// </summary>
         private void GameView()
         {
             CenterCanvas();
@@ -474,6 +486,9 @@ namespace Snake
             lblDif.Visible = true;
         }
 
+        /// <summary>
+        /// Displays the message for the winner and options to play again or quit.
+        /// </summary>
         private void WinningView()
         {
             CenterWinningLabel();
@@ -502,6 +517,9 @@ namespace Snake
             btnQuit.Visible = true;
         }
 
+        /// <summary>
+        /// Displays the game view after the game has been restarted.
+        /// </summary>
         private void RestartGameView()
         {
             btnPlayAgain.Enabled = false;
@@ -520,6 +538,9 @@ namespace Snake
             lblScore.Text = $"Score: 0";
         }
 
+        /// <summary>
+        /// Displays the game view when the game is stopped.
+        /// </summary>
         private void GameStoppedView()
         {
             btnPlayAgain.Enabled = true;
@@ -535,6 +556,9 @@ namespace Snake
             btnIncreaseDif.Visible = true;
         }
 
+        /// <summary>
+        /// Adds the set of instructions to the text box from the rules view. 
+        /// </summary>
         private void SetInstructions()
         {
             tbInstr.Text = "1. The goal of the game is to grow your snake as much as possible@" +
@@ -548,113 +572,179 @@ namespace Snake
             tbInstr.Text = tbInstr.Text.Replace("@", System.Environment.NewLine);
         }
 
+        /// <summary>
+        /// Places the start game button in the middle of the screen.
+        /// </summary>
         private void CenterStartButton()
         {
             btnStart.Left = (this.ClientSize.Width - btnStart.Width) / 2;
             btnStart.Top = (this.ClientSize.Height - btnStart.Height) / 2;
         }
 
+        /// <summary>
+        /// Places the title of the game in the middle of the screen, right 
+        /// above the start game button.
+        /// </summary>
         private void CenterTitleLabel()
         {
             lblTitle.Left = (this.ClientSize.Width - lblTitle.Width) / 2;
             lblTitle.Top = (this.ClientSize.Height - lblTitle.Height) / 2 - lblTitle.Height;
         }
 
+        /// <summary>
+        /// Places the text box that contains the rules in the middle of the screen.
+        /// </summary>
         private void CenterTextBox()
         {
             tbInstr.Left = (this.ClientSize.Width - tbInstr.Width) / 2;
             tbInstr.Top = (this.ClientSize.Height - tbInstr.Height) / 2 + 30;
         }
 
+        /// <summary>
+        /// Places the instruction label in the middle of the screen,
+        /// right on top of the text box.
+        /// </summary>
         private void CenterInstructionsLabel()
         {
             lblInstructions.Left = (this.ClientSize.Width - lblInstructions.Width) / 2;
             lblInstructions.Top = tbInstr.Top - lblInstructions.Height - 10;
         }
 
+        /// <summary>
+        /// Places the ready button in the middle of the screen, 
+        /// just below the text box.
+        /// </summary>
         private void CenterReadyButton()
         {
             btnReady.Left = (this.ClientSize.Width -btnReady.Width) / 2;
             btnReady.Top = tbInstr.Top + tbInstr.Height + 10;
         }
 
+        /// <summary>
+        /// Places the medium difficulty button in the center of the screen.
+        /// </summary>
         private void CenterMediumButton()
         {
             btnMDif.Left = (this.ClientSize.Width - btnMDif.Width) / 2;
             btnMDif.Top = (this.ClientSize.Height - btnMDif.Height) / 2;
         }
 
+
+        /// <summary>
+        /// Places the easy difficulty button in the middle of the screen, 
+        /// right to the left of the medium difficulty button.
+        /// </summary>
         private void CenterEasyButton()
         {
             btnEDif.Left = btnMDif.Left - btnEDif.Width - 50;
             btnEDif.Top = btnMDif.Top;
         }
 
+        /// <summary>
+        /// Places the hard difficulty button in the middle of the screen, 
+        /// exactly to the right of the medium difficulty button.
+        /// </summary>
         private void CenterHardButton()
         {
             btnHDif.Left = btnMDif.Left + btnHDif.Width + 50;
             btnHDif.Top = btnMDif.Top;
         }
+
+        /// <summary>
+        /// Places the choose difficulty label in the middle of the screen,
+        /// right on top of the medium difficulty button.
+        /// </summary>
         private void CenterCDLabel()
         {
             lblDifChoice.Left = (this.ClientSize.Width - lblDifChoice.Width) / 2;
             lblDifChoice.Top = (this.ClientSize.Height - lblDifChoice.Height) / 2 - btnMDif.Height - 50;
         }
 
+        /// <summary>
+        /// Places the game canvas in the middle of the screen.
+        /// </summary>
         private void CenterCanvas()
         {
             picCanvas.Left = (this.ClientSize.Width - picCanvas.Width) / 2;
             picCanvas.Top = (this.ClientSize.Height - picCanvas.Height) / 2;
         }
 
+        /// <summary>
+        /// Places the score label above the top left corner of the game canvas.
+        /// </summary>
         private void PlaceScoreLabel()
         {
             lblScore.Left = picCanvas.Left;
             lblScore.Top = picCanvas.Top - lblScore.Height - 5;
         }
 
+        /// <summary>
+        /// Places the highscore label above the top right corner of the game canvas.
+        /// </summary>
         private void PlaceHighscoreLabel()
         {
             lblHighscore.Left = picCanvas.Left + picCanvas.Width - lblHighscore.Width;
             lblHighscore.Top = picCanvas.Top - lblHighscore.Height - 5;
         }
 
+        /// <summary>
+        /// Places the difficulty label in the middle of the screen above the game canvas.
+        /// </summary>
         private void PlaceDifLabel()
         {
             lblDif.Left = (lblHighscore.Left + lblScore.Left) / 2;
             lblDif.Top = picCanvas.Top - lblDif.Height - 5;
         }
 
+        /// <summary>
+        /// Places the play again button next to the top right corner of the game canvas.
+        /// </summary>
         private void PlacePlayAgainButton()
         {
             btnPlayAgain.Left = picCanvas.Left + picCanvas.Width + 10;
             btnPlayAgain.Top = picCanvas.Top;
         }
 
+        /// <summary>
+        /// Places the quit game button next to the bottom right corner of the game canvas.
+        /// </summary>
         private void PlaceQuitButton()
         {
             btnQuit.Left = picCanvas.Left + picCanvas.Width + 10;
             btnQuit.Top = picCanvas.Top + picCanvas.Height - btnQuit.Height; 
         }
 
+        /// <summary>
+        /// Places the increase difficulty button next to the top left corner of the game canvas.
+        /// </summary>
         private void PlaceIncreaseDifButton()
         {
             btnIncreaseDif.Left = picCanvas.Left - btnIncreaseDif.Width - 10;
             btnIncreaseDif.Top = picCanvas.Top;
         }
 
+        /// <summary>
+        /// Places the decrease difficulty button next to the bottom left corner of the game canvas.
+        /// </summary>
         private void PlaceDecreaseDifButton()
         {
             btnDecreaseDif.Left = picCanvas.Left - btnIncreaseDif.Width - 10;
             btnDecreaseDif.Top = picCanvas.Top + picCanvas.Height - btnDecreaseDif.Height;
         }
 
+        /// <summary>
+        /// Places the winning label in the middle of the screen.
+        /// </summary>
         private void CenterWinningLabel()
         {
             lblWinner.Left = (this.ClientSize.Width -  lblWinner.Width) / 2;
             lblWinner.Top = (this.ClientSize.Height - lblWinner.Height) / 2 - 115;
         }
 
+        /// <summary>
+        /// Places the play again and quit buttons in the middle of the screen just under 
+        /// the winning label in the winning view.
+        /// </summary>
         private void PlaceWinningViewButtons()
         {
             btnStart.Height = btnQuit.Height;
@@ -667,19 +757,30 @@ namespace Snake
             btnStart.Top = lblWinner.Top + lblWinner.Height + 30;
         }
 
+        /// <summary>
+        /// Keeps the ui elements in the same position relative 
+        /// to the borders of the frame when resizing.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GameForm_Resize(object sender, EventArgs e)
         {
+            // Start game view
             CenterTitleLabel();
             CenterStartButton();
 
+            // Rules view
             CenterTextBox();
             CenterInstructionsLabel();
+            CenterReadyButton();
 
+            // Change Difficulty view
             CenterMediumButton();
             CenterEasyButton();
             CenterHardButton();
             CenterCDLabel();
 
+            // Game view
             CenterCanvas();
             PlaceScoreLabel();
             PlaceHighscoreLabel();
@@ -690,10 +791,16 @@ namespace Snake
             PlaceIncreaseDifButton();
             PlaceDecreaseDifButton();
 
+            // Winning view
             CenterWinningLabel();
             PlaceWinningViewButtons();
         }
 
+        /// <summary>
+        /// Paints the game canvas according to the current game state.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateGraphics(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
