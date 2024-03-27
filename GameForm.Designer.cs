@@ -385,6 +385,15 @@ namespace Snake
             lblInstructions.Enabled = true;
             lblInstructions.Visible = true;
 
+            lblWinner.Enabled = false;
+            lblWinner.Visible = false;
+
+            btnQuit.Enabled = false;
+            btnQuit.Visible = false;
+
+            btnPlayAgain.Enabled = false;
+            btnPlayAgain.Visible = false;
+
             tbInstr.Enabled = true;
             tbInstr.Visible = true;
 
@@ -491,6 +500,39 @@ namespace Snake
 
             btnQuit.Enabled = true;
             btnQuit.Visible = true;
+        }
+
+        private void RestartGameView()
+        {
+            btnPlayAgain.Enabled = false;
+            btnPlayAgain.Visible = false;
+            btnPlayAgain.Text = "Play Again";
+
+            btnQuit.Enabled = false;
+            btnQuit.Visible = false;
+
+            btnDecreaseDif.Enabled = false;
+            btnDecreaseDif.Visible = false;
+
+            btnIncreaseDif.Enabled = false;
+            btnIncreaseDif.Visible = false;
+
+            lblScore.Text = $"Score: 0";
+        }
+
+        private void GameStoppedView()
+        {
+            btnPlayAgain.Enabled = true;
+            btnPlayAgain.Visible = true;
+
+            btnQuit.Enabled = true;
+            btnQuit.Visible = true;
+
+            btnDecreaseDif.Enabled = true;
+            btnDecreaseDif.Visible = true;
+
+            btnIncreaseDif.Enabled = true;
+            btnIncreaseDif.Visible = true;
         }
 
         private void SetInstructions()
@@ -647,6 +689,9 @@ namespace Snake
             PlaceQuitButton();
             PlaceIncreaseDifButton();
             PlaceDecreaseDifButton();
+
+            CenterWinningLabel();
+            PlaceWinningViewButtons();
         }
 
         private void UpdateGraphics(object sender, PaintEventArgs e)

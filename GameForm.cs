@@ -1,12 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Snake
@@ -151,25 +144,14 @@ namespace Snake
         {
             _snake.Clear();
             _snake.Add(new Unit { X = 1, Y = 0 });
-            _snake.Add(new Unit { X = 0, Y = 0});
+            _snake.Add(new Unit { X = 0, Y = 0 });
             _currentDirection = Direction.Right;
         }
 
         private void GameStopped()
         {
             gameTimer.Stop();
-
-            btnPlayAgain.Enabled = true;
-            btnPlayAgain.Visible = true;
-
-            btnQuit.Enabled = true;
-            btnQuit.Visible = true;
-
-            btnDecreaseDif.Enabled = true;
-            btnDecreaseDif.Visible = true;
-
-            btnIncreaseDif.Enabled = true;
-            btnIncreaseDif.Visible = true;
+            GameStoppedView();
         }
 
         private void GameOver()
@@ -207,22 +189,9 @@ namespace Snake
             _maxWidth = picCanvas.Width / _cellSize - 1;
             _maxHeight = picCanvas.Height / _cellSize - 1;
 
-            btnPlayAgain.Enabled = false;
-            btnPlayAgain.Visible = false;
-            btnPlayAgain.Text = "Play Again";
-
-            btnQuit.Enabled = false;
-            btnQuit.Visible = false;
-
-            btnDecreaseDif.Enabled = false;
-            btnDecreaseDif.Visible = false;
-
-            btnIncreaseDif.Enabled = false;
-            btnIncreaseDif.Visible = false;
+            RestartGameView();
 
             _score = 0;
-            lblScore.Text = $"Score: {_score}";
-
             _pauseFlag = false;
 
             PlaceSnake();
