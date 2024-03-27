@@ -29,6 +29,11 @@ namespace Snake
             StartGameView();
         }
 
+        /// <summary>
+        /// Updates the elements of the game according to their logic.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateGame(object sender, EventArgs e)
         {
             int coordX = _snake[0].X;
@@ -88,13 +93,18 @@ namespace Snake
 
             _waitingFlag = false;
             
+            // Redraw
             picCanvas.Invalidate();
         }
 
+        /// <summary>
+        /// Performs the logic behind the snake eating food.
+        /// </summary>
         private void EatFood()
         {
             _score++;
             
+            // Check if the player won
             if (_score == ((picCanvas.Width - 1) / _cellSize) * ((picCanvas.Height - 1) / _cellSize) - 2) 
             {
                 gameTimer.Stop();
@@ -103,6 +113,7 @@ namespace Snake
 
             lblScore.Text = $"Score: {_score}";
 
+            // Add a new unit to the snake
             _snake.Add(new Unit
             {
                 X = _snake[_snake.Count - 1].X,
@@ -112,6 +123,9 @@ namespace Snake
             PlaceFood();
         }
 
+        /// <summary>
+        /// Generates a new food after its previous version has been eaten.
+        /// </summary>
         private void PlaceFood()
         {
             Random rand = new Random();
@@ -120,6 +134,8 @@ namespace Snake
             int x = 0;
             int y = 0;
 
+            // Generate a position until the food 
+            // will not be created inside the snake
             while (ok == 0)
             {
                 ok = 1;
@@ -140,6 +156,9 @@ namespace Snake
             _food = new Unit { X = x, Y = y };
         }
 
+        /// <summary>
+        /// Places the snake in its initial position.
+        /// </summary>
         private void PlaceSnake()
         {
             _snake.Clear();
@@ -148,12 +167,18 @@ namespace Snake
             _currentDirection = Direction.Right;
         }
 
+        /// <summary>
+        /// Stops the game.
+        /// </summary>
         private void GameStopped()
         {
             gameTimer.Stop();
             GameStoppedView();
         }
 
+        /// <summary>
+        /// Stops the game and modifies highscore if the current scote is higher.
+        /// </summary>
         private void GameOver()
         {
             GameStopped();
@@ -184,6 +209,9 @@ namespace Snake
             }
         }
 
+        /// <summary>
+        /// Increases the difficulty of the game by one level.
+        /// </summary>
         private void IncreaseDif()
         {
             if (gameTimer.Interval != 40)
@@ -202,6 +230,9 @@ namespace Snake
             }
         }
 
+        /// <summary>
+        /// Decreases the difficulty of the game by one level.
+        /// </summary>
         private void DecreaseDif()
         {
             if (gameTimer.Interval != 100)
@@ -220,6 +251,9 @@ namespace Snake
             }
         }
 
+        /// <summary>
+        /// Brings the game to its default settings and then starts it.
+        /// </summary>
         private void RestartGame()
         {
             _maxWidth = picCanvas.Width / _cellSize - 1;
